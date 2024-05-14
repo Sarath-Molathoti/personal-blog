@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Commands</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>sarathmolathoti.me</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../contact.html">Categories</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <article class="blog-post">
+            <h1>Docker Commands</h1>
+            <p>Posted on May 14, 2024</p>
+            <div class="tags">
+                <span class="tag">Docker</span>
+                <span class="tag">Commands</span>
+                <span class="tag">Basics</span>
+            </div>
+            <p>
+                Docker commands are essential for managing Docker containers, images, and networks. Below are some of the basic Docker commands that every user should know:
+            </p>
+            <h3>1. Pull an Image</h3>
+            <p>
+                The <code>docker pull</code> command is used to download a Docker image from Docker Hub or another registry.
+            </p>
+            <pre><code>docker pull IMAGE_NAME[:TAG]</code></pre>
+
+            <h3>2. List Downloaded Images</h3>
+            <p>
+                The <code>docker images</code> command lists all downloaded images on your local machine.
+            </p>
+            <pre><code>docker images</code></pre>
+
+            <h3>3. Run a Container</h3>
+            <p>
+                The <code>docker run</code> command creates and starts a new container based on the specified image.
+            </p>
+            <pre><code>docker run IMAGE_NAME[:TAG]</code></pre>
+
+            <h3>4. List Running Containers</h3>
+            <p>
+                The <code>docker ps</code> command lists all running containers.
+            </p>
+            <pre><code>docker ps</code></pre>
+
+            <h3>5. List All Containers (including stopped ones)</h3>
+            <p>
+                The <code>docker ps -a</code> command lists all containers, including those that have stopped.
+            </p>
+            <pre><code>docker ps -a</code></pre>
+
+            <h3>6. Stop a Running Container</h3>
+            <p>
+                The <code>docker stop</code> command stops a running container.
+            </p>
+            <pre><code>docker stop CONTAINER_ID or CONTAINER_NAME</code></pre>
+
+            <h3>7. Remove a Container</h3>
+            <p>
+                The <code>docker rm</code> command removes a stopped container.
+            </p>
+            <pre><code>docker rm CONTAINER_ID or CONTAINER_NAME</code></pre>
+
+            <h3>8. Interactive Shell in a Container</h3>
+            <p>
+                The <code>docker exec</code> command opens an interactive shell in a running container.
+            </p>
+            <pre><code>docker exec -it CONTAINER_ID or CONTAINER_NAME /bin/bash</code></pre>
+
+            <h3>9. Expose Container Port to Host</h3>
+            <p>
+                The <code>docker run -p</code> command maps a port from the container to a port on the host machine.
+            </p>
+            <pre><code>docker run -p HOST_PORT:CONTAINER_PORT IMAGE_NAME[:TAG]</code></pre>
+
+            <h3>10. Volume Mounting</h3>
+            <p>
+                The <code>docker run -v</code> command mounts a volume from the host to the container, allowing data persistence.
+            </p>
+            <pre><code>docker run -v HOST_PATH:CONTAINER_PATH IMAGE_NAME[:TAG]</code></pre>
+
+            <h3>11. Inspect Container Details</h3>
+            <p>
+                The <code>docker inspect</code> command displays detailed information about a container.
+            </p>
+            <pre><code>docker inspect CONTAINER_ID or CONTAINER_NAME</code></pre>
+
+            <h3>12. View Container Logs</h3>
+            <p>
+                The <code>docker logs</code> command displays the logs of a running or stopped container.
+            </p>
+            <pre><code>docker logs CONTAINER_ID or CONTAINER_NAME</code></pre>
+
+            <h3>13. Remove an Image</h3>
+            <p>
+                The <code>docker rmi</code> command removes a Docker image.
+            </p>
+            <pre><code>docker rmi IMAGE_ID or IMAGE_NAME[:TAG]</code></pre>
+
+            <h3>14. Network Commands</h3>
+            <p>
+                The <code>docker network ls</code> command lists Docker networks, and <code>docker network inspect</code> inspects a network.
+            </p>
+            <pre><code>docker network ls</code></pre>
+            <pre><code>docker network inspect NETWORK_ID or NETWORK_NAME</code></pre>
+
+            <h3>15. Remove an Image</h3>
+            <p>
+                The <code>docker rmi</code> command deletes a Docker image.
+            </p>
+            <pre><code>docker rmi IMAGE_ID</code></pre>
+
+            <h3>16. Run Container in Detached Mode</h3>
+            <p>
+                The <code>docker run -d</code> command runs a Docker container in detached mode, exposes a port to the host, and gives it a custom name.
+            </p>
+            <pre><code>docker run -d -p HOST_PORT:CONTAINER_PORT --name CUSTOM_NAME IMAGE_NAME</code></pre>
+
+            <h3>17. Access Container Terminal</h3>
+            <p>
+                The <code>docker exec -it</code> command allows access to the terminal of a running Docker container.
+            </p>
+            <pre><code>docker exec -it CONTAINER_ID or CONTAINER_NAME /bin/bash</code></pre>
+
+            <p>
+                These commands are essential for managing Docker environments effectively. Mastering them will enable you to handle containers, images, and networks with ease.
+            </p>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Sarath Molathoti. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://x.com/MolathotiSarath?s=09"><i class="fab fa-twitter"></i> Twitter</a> | 
+                <a href="https://www.linkedin.com/in/molathoti-sarath-2276ba145?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i> LinkedIn</a> | 
+                <a href="https://www.instagram.com/thisis_sarath_m?igsh=MTR3eGlpdHl0aGFpNQ=="><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

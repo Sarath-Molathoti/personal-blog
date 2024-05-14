@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog</title>
+    <title>sarathmolathoti.me</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -12,12 +12,19 @@
     <header>
         <div class="container">
             <div class="logo">
-                <h1>EAT-CODE-SLEEP</h1>
+                <h1>sarathmolathoti.me</h1>
             </div>
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="contact.html">Categories</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">Categories <i class="fas fa-angle-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="#">Work</a>
+                            <a href="#">Personal</a>
+                            <a href="#">Books</a>
+                        </div>
+                    </li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
@@ -32,14 +39,24 @@
     <main>
         <section class="blog-posts">
             <article>
-                <h2><a href="post1.html">Basic Linux Commands</a></h2>
+                <h2><a href="content/linux-commands.html">Basic Linux Commands</a></h2>
                 <p>Posted on May 14, 2024</p>
-                <p>Excerpt from the blog post... <a href="post1.html">Read more</a></p>
+                <p>Linux commands are powerful tools for interacting with your system, performing tasks efficiently, and automating processes... <a href="content/linux-commands.html">Read more</a></p>
             </article>
             <article>
-                <h2><a href="post2.html">Blog Post Title 2</a></h2>
-                <p>Posted on May 10, 2024</p>
-                <p>Excerpt from the blog post... <a href="post2.html">Read more</a></p>
+                <h2><a href="content/docker-commands.html">Docker Commands</a></h2>
+                <p>Posted on May 14, 2024</p>
+                <p>Docker commands are essential for managing Docker containers, images, and networks... <a href="content/docker-commands.html">Read more</a></p>
+            </article>
+            <article>
+                <h2><a href="content/code-layout-python-standards.html">Code Layout - Python Coding Standards (Part1)</a></h2>
+                <p>Posted on May 14, 2024</p>
+                <p>This article outlines best practices and coding standards for Python development... <a href="content/code-layout-python-standards.html">Read more</a></p>
+            </article>
+            <article>
+                <h2><a href="content/whitespace-commas-python-standards.html">Whitespace and Commas - Python Coding Standards (Part2)</a></h2>
+                <p>Posted on May 14, 2024</p>
+                <p>In coding, maintaining consistent and clean whitespace usage is essential for code readability and aesthetics... <a href="content/whitespace-commas-python-standards.html">Read more</a></p>
             </article>
             <article>
                 <h2><a href="post1.html">Blog Post Title 1</a></h2>
@@ -52,12 +69,12 @@
                 <p>Excerpt from the blog post... <a href="post2.html">Read more</a></p>
             </article>
             <article>
-                <h2><a href="post1.html">Blog Post Title 1</a></h2>
+                <h2><a href="post1.html">Blog Post Title 3</a></h2>
                 <p>Posted on May 14, 2024</p>
                 <p>Excerpt from the blog post... <a href="post1.html">Read more</a></p>
             </article>
             <article>
-                <h2><a href="post2.html">Blog Post Title 2</a></h2>
+                <h2><a href="post2.html">Blog Post Title 4</a></h2>
                 <p>Posted on May 10, 2024</p>
                 <p>Excerpt from the blog post... <a href="post2.html">Read more</a></p>
             </article>
@@ -67,11 +84,11 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 My Blog. All rights reserved.</p>
+            <p>&copy; 2024 Sarath Molathoti. All rights reserved.</p>
             <div class="social-links">
-                <a href="#"><i class="fab fa-twitter"></i> Twitter</a> | 
-                <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a> | 
-                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://x.com/MolathotiSarath?s=09"><i class="fab fa-twitter"></i> Twitter</a> | 
+                <a href="https://www.linkedin.com/in/molathoti-sarath-2276ba145?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i> LinkedIn</a> | 
+                <a href="https://www.instagram.com/thisis_sarath_m?igsh=MTR3eGlpdHl0aGFpNQ=="><i class="fab fa-instagram"></i> Instagram</a>
             </div>
         </div>
     </footer>
