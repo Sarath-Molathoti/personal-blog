@@ -286,3 +286,116 @@ footer .social-links a:hover {
         font-size: 0.8rem;
     }
 }
+
+/* About Me Section */
+.about-me {
+    background: #fff;
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin: 2rem auto;
+    max-width: 800px;
+    text-align: left; /* Align content to the left */
+}
+
+.about-me h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.about-me p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin: 0.5rem 0;
+}
+
+/* Media Queries for responsiveness */
+@media screen and (max-width: 768px) {
+    .about-me {
+        padding: 1.5rem;
+    }
+
+    .about-me h1 {
+        font-size: 2rem;
+    }
+
+    .about-me p {
+        font-size: 1rem;
+    }
+}
+/* Contact Section */
+.contact-section {
+    background: #fff;
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin: 2rem auto;
+    max-width: 800px;
+    text-align: left;
+}
+
+.contact-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.contact-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin: 0.5rem 0;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.contact-form button {
+    font-size: 1rem;
+    padding: 0.7rem;
+    background-color: #0044cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #003399;
+}
+
+/* Media Queries for responsiveness */
+@media screen and (max-width: 768px) {
+    .contact-section {
+        padding: 1.5rem;
+    }
+
+    .contact-section h1 {
+        font-size: 2rem;
+    }
+
+    .contact-form label,
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form button {
+        font-size: 1rem;
+    }
+}
+
