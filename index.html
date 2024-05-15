@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -31,8 +33,10 @@
                 </ul>
             </nav>
             <div class="search-bar">
-                <input type="text" placeholder="Search...">
-                <button type="submit"><i class="fas fa-search"></i></button>
+                <form id="search-form">
+                    <input type="text" id="search-input" placeholder="Search...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
             </div>
         </div>
     </header>
@@ -42,22 +46,28 @@
             <article>
                 <h2><a href="content/linux-commands.html">Basic Linux Commands</a></h2>
                 <p>Posted on May 14, 2024</p>
-                <p>Linux commands are powerful tools for interacting with your system, performing tasks efficiently, and automating processes... <a href="content/linux-commands.html">Read more</a></p>
+                <p>Linux commands are powerful tools for interacting with your system, performing tasks efficiently, and
+                    automating processes... <a href="content/linux-commands.html">Read more</a></p>
             </article>
             <article>
                 <h2><a href="content/docker-commands.html">Docker Commands</a></h2>
                 <p>Posted on May 14, 2024</p>
-                <p>Docker commands are essential for managing Docker containers, images, and networks... <a href="content/docker-commands.html">Read more</a></p>
+                <p>Docker commands are essential for managing Docker containers, images, and networks... <a
+                        href="content/docker-commands.html">Read more</a></p>
             </article>
             <article>
-                <h2><a href="content/code-layout-python-standards.html">Code Layout - Python Coding Standards (Part1)</a></h2>
+                <h2><a href="content/code-layout-python-standards.html">Code Layout - Python Coding Standards
+                        (Part1)</a></h2>
                 <p>Posted on May 14, 2024</p>
-                <p>This article outlines best practices and coding standards for Python development... <a href="content/code-layout-python-standards.html">Read more</a></p>
+                <p>This article outlines best practices and coding standards for Python development... <a
+                        href="content/code-layout-python-standards.html">Read more</a></p>
             </article>
             <article>
-                <h2><a href="content/whitespace-commas-python-standards.html">Whitespace and Commas - Python Coding Standards (Part2)</a></h2>
+                <h2><a href="content/whitespace-commas-python-standards.html">Whitespace and Commas - Python Coding
+                        Standards (Part2)</a></h2>
                 <p>Posted on May 14, 2024</p>
-                <p>In coding, maintaining consistent and clean whitespace usage is essential for code readability and aesthetics... <a href="content/whitespace-commas-python-standards.html">Read more</a></p>
+                <p>In coding, maintaining consistent and clean whitespace usage is essential for code readability and
+                    aesthetics... <a href="content/whitespace-commas-python-standards.html">Read more</a></p>
             </article>
             <article>
                 <h2><a href="post1.html">Blog Post Title 1</a></h2>
@@ -87,11 +97,102 @@
         <div class="container">
             <p>&copy; 2024 Sarath Molathoti. All rights reserved.</p>
             <div class="social-links">
-                <a href="https://x.com/MolathotiSarath?s=09"><i class="fab fa-twitter"></i> Twitter</a> | 
-                <a href="https://www.linkedin.com/in/molathoti-sarath-2276ba145?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i> LinkedIn</a> | 
-                <a href="https://www.instagram.com/thisis_sarath_m?igsh=MTR3eGlpdHl0aGFpNQ=="><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://x.com/MolathotiSarath?s=09"><i class="fab fa-twitter"></i> Twitter</a> |
+                <a
+                    href="https://www.linkedin.com/in/molathoti-sarath-2276ba145?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i
+                        class="fab fa-linkedin-in"></i> LinkedIn</a> |
+                <a href="https://www.instagram.com/thisis_sarath_m?igsh=MTR3eGlpdHl0aGFpNQ=="><i
+                        class="fab fa-instagram"></i> Instagram</a>
             </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // // Load header and footer
+            // fetch('header.html')
+            //     .then(response => response.text())
+            //     .then(data => document.querySelector('header').innerHTML = data);
+
+            // fetch('footer.html')
+            //     .then(response => response.text())
+            //     .then(data => document.querySelector('footer').innerHTML = data);
+
+            // Search functionality
+            document.getElementById('search-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const query = document.getElementById('search-input').value.toLowerCase();
+                if (query) {
+                    performSearch(query);
+                }
+            });
+        });
+
+        function performSearch(query) {
+            const contentFolder = 'content/';
+            const files = [
+                'linux-commands.html',
+                'docker-commands.html',
+                'code-layout-python-standards.html',
+                'whitespace-commas-python-standards.html',
+                // Add more file names as needed
+            ];
+
+            let results = [];
+            let filesProcessed = 0;
+
+            files.forEach(file => {
+                fetch(contentFolder + file)
+                    .then(response => response.text())
+                    .then(data => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(data, 'text/html');
+                        const textContent = doc.body.textContent.toLowerCase();
+
+                        if (textContent.includes(query)) {
+                            results.push({
+                                file: file,
+                                content: data
+                            });
+                        }
+                        filesProcessed++;
+                        if (filesProcessed === files.length) {
+                            displaySearchResults(results, query);
+                        }
+                    });
+            });
+        }
+
+        function displaySearchResults(results, query) {
+            const mainContent = document.querySelector('main');
+            mainContent.innerHTML = '';
+
+            if (results.length > 0) {
+                results.forEach(result => {
+                    const resultElement = document.createElement('article');
+                    resultElement.innerHTML = `
+                <h2><a href="content/${result.file}">${result.file.replace('.html', '').replace(/-/g, ' ')}</a></h2>
+                <p>Matching content: ...${extractSnippet(result.content, query)}...</p>
+            `;
+                    mainContent.appendChild(resultElement);
+                });
+            } else {
+                mainContent.innerHTML = '<p>No results found.</p>';
+            }
+        }
+
+        function extractSnippet(content, query) {
+            const lowerContent = content.toLowerCase();
+            const queryIndex = lowerContent.indexOf(query);
+            if (queryIndex === -1) return '';
+
+            const snippetLength = 100;
+            const start = Math.max(0, queryIndex - snippetLength / 2);
+            const end = Math.min(content.length, queryIndex + snippetLength / 2);
+
+            return content.substring(start, end).replace(new RegExp(query, 'gi'), match => `<mark>${match}</mark>`);
+        }
+
+    </script>
 </body>
+
 </html>
