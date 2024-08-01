@@ -18,7 +18,6 @@ function performSearch(query) {
     "docker-commands.html",
     "code-layout-python-standards.html",
     "whitespace-commas-python-standards.html",
-    "deploy-invitation-ui.html",
     "jenkins-setup-on-debian.html",
     "build-spring-project-using-jenkins.html",
     "nx-monorepo-setup.html",
