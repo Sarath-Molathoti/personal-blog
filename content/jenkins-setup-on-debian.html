@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Setting Up Jenkins on a Debian-Based Operating System</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <h1>sarathmolathoti.me</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../contact.html">Categories</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="search-bar">
+          <form id="search-form">
+            <input type="text" id="search-input" placeholder="Search..." />
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <article class="blog-post">
+        <h1>Setting Up Jenkins on a Debian-Based Operating System</h1>
+        <p>Posted on July 17, 2024</p>
+        <div class="tags">
+          <span class="tag">Jenkins</span>
+          <span class="tag">CI/CD</span>
+          <span class="tag">Debian</span>
+        </div>
+        <p>
+          Jenkins is a popular open-source automation server used for continuous
+          integration and delivery (CI/CD). This guide will walk you through the
+          steps to set up Jenkins on a Debian-based operating system.
+        </p>
+        <h3>Prerequisites</h3>
+        <p>
+          - A Debian-based operating system installed.<br />
+          - Root or sudo privileges on your system.<br />
+          - Access to the internet to download packages.
+        </p>
+
+        <h3>Step-by-Step Installation</h3>
+
+        <h3>Step 1: Add Jenkins Debian Repository</h3>
+        <p>
+          1. Visit the
+          <a href="https://pkg.jenkins.io/" style="color: blue"
+            >Jenkins Package Repository</a
+          >, select Debian-stable as your OS, and follow the provided commands
+          to install Jenkins.Else go through the below commands to install
+          Jenkins
+        </p>
+        <p>2. Add the Jenkins Key:</p>
+        <pre><code>sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key</code></pre>
+
+        <p>3. Add Jenkins Repository Entry:</p>
+        <pre><code>echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null</code></pre>
+
+        <h3>Step 2: Update Package Index and Install Jenkins</h3>
+        <p>1. Update the Local Package Index:</p>
+        <pre><code>sudo apt-get update</code></pre>
+
+        <p>2. Install Java Runtime Environment:</p>
+        <pre><code>sudo apt-get install fontconfig openjdk-17-jre</code></pre>
+
+        <p>3. Install Jenkins:</p>
+        <pre><code>sudo apt-get install jenkins</code></pre>
+
+        <h3>Step 3: Start and Enable Jenkins Service</h3>
+        <p>1. Start Jenkins:</p>
+        <pre><code>sudo systemctl start jenkins</code></pre>
+
+        <p>2. Enable Jenkins to start at boot:</p>
+        <pre><code>sudo systemctl enable jenkins</code></pre>
+
+        <p>3. Check Jenkins Status:</p>
+        <pre><code>sudo systemctl status jenkins</code></pre>
+
+        <h3>Step 4: Access Jenkins</h3>
+        <p>
+          Jenkins is now installed and running on your server. You can access
+          the Jenkins web interface by navigating to
+          <code>http://&lt;your-server-ip&gt;:8080</code> in your web browser.
+          In this example, the IP address is <code>35.244.48.209</code>, so you
+          would go to <code>http://35.244.48.209:8080</code>.
+        </p>
+
+        <h3>Step 5: Unlock Jenkins</h3>
+        <p>
+          When you first access Jenkins, it will ask you for an initial admin
+          password. Retrieve this password by running:
+        </p>
+        <pre><code>sudo cat /var/lib/jenkins/secrets/initialAdminPassword</code></pre>
+        <p>The output will be a password string, for example:</p>
+        <pre><code>c7df0c00f72c4c2296506b295df7edba</code></pre>
+
+        <h3>Step 6: Customize Jenkins</h3>
+        <p>1. Install Suggested Plugins:</p>
+        <p>
+          After entering the initial admin password, Jenkins will prompt you to
+          install plugins. Click on "Install suggested plugins" to begin the
+          installation process.
+        </p>
+        <img
+          src="./assets/JenkinsPluginInstall.PNG"
+          alt="Install Suggested Plugins"
+          style="max-width: 100%"
+        />
+        <img
+          src="./assets/JenkinsPluginInstallInprogress.PNG"
+          alt="Install Suggested Plugins"
+          style="max-width: 100%"
+        />
+
+        <p>2. Create Admin User:</p>
+        <p>
+          After the plugins are installed, Jenkins will prompt you to create an
+          admin user. Fill in the details to create your Jenkins admin account.
+        </p>
+        <img
+          src="./assets/JenkinsCreateAdmin.PNG"
+          alt="Create Admin User"
+          style="max-width: 100%"
+        />
+
+        <p>
+          You have successfully installed and set up Jenkins on your
+          Debian-based system. You can now start configuring your Jenkins jobs
+          and pipelines to automate your development workflow. For further
+          customization and advanced configurations, refer to the
+          <a href="https://www.jenkins.io/doc/" style="color: blue"
+            >Jenkins Documentation</a
+          >.
+        </p>
+      </article>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Sarath Molathoti. All rights reserved.</p>
+        <div class="social-links">
+          <a href="https://x.com/MolathotiSarath?s=09"
+            ><i class="fab fa-twitter"></i> Twitter</a
+          >
+          |
+          <a
+            href="https://www.linkedin.com/in/molathoti-sarath-2276ba145?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            ><i class="fab fa-linkedin-in"></i> LinkedIn</a
+          >
+          |
+          <a
+            href="https://www.instagram.com/thisis_sarath_m?igsh=MTR3eGlpdHl0aGFpNQ=="
+            ><i class="fab fa-instagram"></i> Instagram</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
