@@ -21,6 +21,7 @@ function performSearch(query) {
     "jenkins-setup-on-debian.html",
     "build-spring-project-using-jenkins.html",
     "nx-monorepo-setup.html",
+    "deployment-strategies-in-devops.html",
     // Add more file names as needed
   ];
 
