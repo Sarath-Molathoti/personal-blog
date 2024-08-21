@@ -69,6 +69,11 @@
 
         <h3>1. Rolling Deployment: Gradual and Steady Updates</h3>
         <p>
+          The application is updated incrementally, replacing instances of the
+          old version with the new version one at a time. This strategy allows
+          for zero downtime.
+        </p>
+        <p>
           Imagine you’re replacing light bulbs in a hallway, one by one, without
           turning off the entire hallway’s lights. Similarly, in a rolling
           deployment, software updates are gradually applied to parts of the
@@ -100,6 +105,13 @@
 
         <h3>2. Blue-Green Deployment: Seamless Switchovers</h3>
         <p>
+          Two identical environments (blue and green) are maintained. The blue
+          environment runs the current version, while the green is updated with
+          the new version. Once the green environment is verified, traffic is
+          switched to it, and the blue environment is kept for rollback if
+          needed.
+        </p>
+        <p>
           Think of two identical houses, one blue and one green. You live in the
           blue house (the live system), but whenever you want to remodel
           (update), you work on the green house. Once the green house is ready,
@@ -130,6 +142,11 @@
         </p>
 
         <h3>3. Canary Deployment: Testing the Waters</h3>
+        <p>
+          A small subset of users is routed to the new version, while the
+          majority continue using the old version. If the new version works
+          well, it's gradually rolled out to more users.
+        </p>
         <p>
           Consider a restaurant trying out a new dish by serving it to a small
           group of customers first. If they like it, the dish is added to the
@@ -188,6 +205,11 @@
 
         <h3>5. Recreate Deployment: A Fresh Start</h3>
         <p>
+          This is the simplest deployment strategy. The current version of the
+          application is stopped, and the new version is deployed. There is
+          downtime during the deployment.
+        </p>
+        <p>
           Imagine closing a store for a day to completely remodel it before
           reopening. In recreate deployment, the entire system is taken offline,
           updated, and then brought back online once everything is ready. It’s
@@ -211,6 +233,12 @@
         </p>
 
         <h3>6. Shadow Deployment: Testing in the Shadows</h3>
+        <p>
+          The new version is deployed alongside the old version, but the new
+          version doesn't handle actual production traffic. Instead, it
+          processes a copy of the live traffic in parallel to validate its
+          performance.
+        </p>
         <p>
           Imagine you’re testing a new restaurant kitchen by preparing food
           there but only serving it to staff, not customers. Shadow deployment
