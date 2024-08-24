@@ -157,6 +157,11 @@
           problems early and ensures a smoother experience for the wider user
           base.
         </p>
+        <img
+          src="./assets/canary-deployment.webp"
+          alt="Canary Deployment"
+          style="max-width: 100%"
+        />
         <h4>Advantages:</h4>
         <ul>
           <li>Issues can be detected early with minimal impact.</li>
@@ -180,13 +185,28 @@
 
         <h3>4. A/B Testing: Optimizing User Experience</h3>
         <p>
-          A/B testing is like giving two groups of people two slightly different
-          versions of the same website and seeing which one they like better.
-          This strategy is used to compare different versions of a feature or UI
-          element to determine which one performs better. By exposing different
-          user groups to different versions, teams can make data-driven
-          decisions about which version to roll out more broadly.
+          A/B testing is very similar to canary deployment. It can be considered
+          a variant of it. This process deploys an update to a subset of users,
+          just like canary deployments. However, A/B testing is mainly about
+          getting feedback from the users about our changes. One part of the
+          users keep using version A of the application while another part of
+          them uses version B.
         </p>
+        <p>
+          The goal is to decide if we want to roll out the update to all users.
+          This can be a complicated process. We should consider technical
+          aspects like application performance, but we might also want to
+          receive feedback from users if they like the changes or not. For
+          example, with A/B testing, we can measure if the users are more likely
+          to click on a button if we replace the text on it. As its name
+          suggests, an A/B deployment isn’t always related to an upgrade, but
+          can rather be a feature test.
+        </p>
+        <img
+          src="./assets/a-b-deployment.webp"
+          alt="A/B Deployment"
+          style="max-width: 100%"
+        />
         <h4>Advantages:</h4>
         <ul>
           <li>Data-driven decision-making.</li>
@@ -234,19 +254,24 @@
 
         <h3>6. Shadow Deployment: Testing in the Shadows</h3>
         <p>
-          The new version is deployed alongside the old version, but the new
-          version doesn't handle actual production traffic. Instead, it
-          processes a copy of the live traffic in parallel to validate its
-          performance.
+          Shadow deployments are similar to blue-green deployments in the sense
+          that they use two identical environments. One of them is the original
+          production environment, while the other one is the shadow. However, a
+          shadow deployment is different from the previous deployment
+          strategies. In all other approaches, user requests were served by the
+          updated environment. When we use a shadow deployment, both
+          environments receive the requests, but the responses come from the
+          original application version. In other words, we simulate the new
+          updated environment in the production phase, without letting users get
+          a request response from it. This way, we don’t have the risk of
+          introducing bugs to the system while we can monitor and test the new
+          version under load.
         </p>
-        <p>
-          Imagine you’re testing a new restaurant kitchen by preparing food
-          there but only serving it to staff, not customers. Shadow deployment
-          allows the new version of your software to run alongside the current
-          version, processing real user traffic in the background, but without
-          impacting the users. This way, you can see how the new version
-          performs under real-world conditions without risking user experience.
-        </p>
+        <img
+          src="./assets/shadow-deployment.webp"
+          alt="Shadow Deployment"
+          style="max-width: 100%"
+        />
         <h4>Advantages:</h4>
         <ul>
           <li>Real-world testing without affecting user experience.</li>
