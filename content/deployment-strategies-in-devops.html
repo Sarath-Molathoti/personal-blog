@@ -36,7 +36,7 @@
         </div>
       </div>
       <style>
-        ul {
+        .lists {
           list-style-type: disc; /* Ensures bullets are shown */
           margin-left: 20px;
         }
@@ -84,13 +84,13 @@
           whole system offline.
         </p>
         <h4>Advantages:</h4>
-        <ul>
+        <ul class="lists">
           <li>Minimal downtime.</li>
           <li>Users experience a seamless transition.</li>
           <li>Can easily roll back if issues arise on specific instances.</li>
         </ul>
         <h4>Disadvantages:</h4>
-        <ul>
+        <ul class="lists">
           <li>
             Monitoring is more complex since different instances run different
             versions.
@@ -122,7 +122,7 @@
           case something goes wrong.
         </p>
         <h4>Advantages:</h4>
-        <ul>
+        <ul class="lists">
           <li>Zero downtime during deployment.</li>
           <li>Easy rollback by switching back to the previous environment.</li>
           <li>
@@ -131,7 +131,7 @@
           </li>
         </ul>
         <h4>Disadvantages:</h4>
-        <ul>
+        <ul class="lists">
           <li>Requires double the infrastructure, increasing costs.</li>
           <li>Managing two environments can be complex.</li>
         </ul>
@@ -163,13 +163,13 @@
           style="max-width: 100%"
         />
         <h4>Advantages:</h4>
-        <ul>
+        <ul class="lists">
           <li>Issues can be detected early with minimal impact.</li>
           <li>Gradual rollout reduces the risk of widespread problems.</li>
           <li>Allows for real-world testing in a controlled manner.</li>
         </ul>
         <h4>Disadvantages:</h4>
-        <ul>
+        <ul class="lists">
           <li>
             Users in the canary group may experience issues if something goes
             wrong. Complexity in managing different versions for different user
@@ -208,12 +208,12 @@
           style="max-width: 100%"
         />
         <h4>Advantages:</h4>
-        <ul>
+        <ul class="lists">
           <li>Data-driven decision-making.</li>
           <li>Improves user experience based on real feedback.</li>
         </ul>
         <h4>Disadvantages:</h4>
-        <ul>
+        <ul class="lists">
           <li>Can be time-consuming to set up and analyze.</li>
           <li>Requires a large user base to gather meaningful data.</li>
         </ul>
@@ -237,12 +237,12 @@
           significant drawback for businesses that need to be always available.
         </p>
         <h4>Advantages:</h4>
-        <ul>
+        <ul class="lists">
           <li>Simplicity and ease of implementation.</li>
           <li>Ensures the entire system is updated at once.</li>
         </ul>
         <h4>Disadvantages:</h4>
-        <ul>
+        <ul class="lists">
           <li>Involves significant downtime.</li>
           <li>Not suitable for applications requiring high availability.</li>
         </ul>
@@ -273,14 +273,14 @@
           style="max-width: 100%"
         />
         <h4>Advantages:</h4>
-        <ul>
+        <ul class="lists">
           <li>Real-world testing without affecting user experience.</li>
           <li>
             Allows for thorough testing of new versions under real conditions.
           </li>
         </ul>
         <h4>Disadvantages:</h4>
-        <ul>
+        <ul class="lists">
           <li>Complex to set up and maintain.</li>
           <li>Can be resource-intensive.</li>
         </ul>
@@ -296,7 +296,7 @@
           application’s architecture, user base, tolerance for downtime, and the
           criticality of the updates. Here's a quick guide to help you choose:
         </p>
-        <ul>
+        <ul class="lists">
           <li>
             <strong>Rolling Deployment:</strong> Use this if you need continuous
             delivery with minimal disruption.
