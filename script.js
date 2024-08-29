@@ -22,6 +22,7 @@ function performSearch(query) {
     "build-spring-project-using-jenkins.html",
     "nx-monorepo-setup.html",
     "deployment-strategies-in-devops.html",
+    "hyperledger-fabric-basics.html",
     // Add more file names as needed
   ];
 

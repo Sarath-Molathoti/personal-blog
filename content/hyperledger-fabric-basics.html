@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Docker Commands</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <h1>sarathmolathoti.me</h1>
+        </div>
+        <nav>
+          <ul class="lists">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../contact.html">Categories</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="search-bar">
+          <form id="search-form">
+            <input type="text" id="search-input" placeholder="Search..." />
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+      </div>
+      <style>
+        .lists {
+          list-style-type: disc; /* Ensures bullets are shown */
+          margin-left: 20px;
+        }
+
+        li {
+          margin-bottom: 5px; /* Optional: Add spacing between items */
+        }
+      </style>
+    </header>
+
+    <main>
+      <article class="blog-post">
+        <h1>Hyperledger and Hyperledger Fabric</h1>
+        <p>Posted on August 26, 2024</p>
+        <div class="tags">
+          <span class="tag">Hyperledger</span>
+          <span class="tag">Blockchain</span>
+          <span class="tag">Enterprise</span>
+        </div>
+        <p>
+          Hyperledger is an open-source collaborative effort hosted by the Linux
+          Foundation, aimed at advancing cross-industry blockchain technologies.
+          It was founded in 2015 to provide a framework for developing and
+          deploying enterprise-grade blockchain solutions. Hyperledger is not a
+          blockchain or a cryptocurrency but a global collaborative initiative
+          that includes various projects, each designed to fulfill specific
+          needs within the blockchain ecosystem.
+        </p>
+        <p>
+          Hyperledger itself is not a single software product or codebase. It is
+          an umbrella project under the Linux Foundation that hosts multiple
+          independent projects, each with its own codebase. It acts as a
+          governance body and provides a collaborative space for different
+          blockchain projects. It establishes best practices, standards, and
+          guidelines for developing blockchain technologies but does not have a
+          single codebase.
+        </p>
+        <img
+          src="./assets/hyperledger.png"
+          alt="Canary Deployment"
+          style="max-width: 100%"
+        />
+        <p>
+          Imagine it as a large open-source initiative or organization that
+          supports and oversees multiple blockchain-related projects. Think of
+          it as a collection of projects, each with its own development team and
+          codebase.
+        </p>
+
+        <h2 style="color: #1a50ad">Hyperledger Fabric</h2>
+        <p>
+          Hyperledger Fabric is one of the key projects under the Hyperledger
+          umbrella. It is a blockchain framework implementation designed to be a
+          foundation for developing applications or solutions with a modular
+          architecture.
+        </p>
+        <h2 style="color: #1a50ad">Features of Hyperledger Fabric</h2>
+        <ul class="lists">
+          <li>
+            <strong>Permissioned Blockchain:</strong> Unlike public blockchains,
+            Hyperledger Fabric is a permissioned network, meaning that all
+            participants are known and have specific roles. This is ideal for
+            enterprise use cases where data privacy and control are critical.
+          </li>
+          <li>
+            <strong>Modular Design:</strong> It allows components, such as
+            consensus and membership services, to be plug-and-play. Developers
+            can customize the network according to their specific requirements.
+          </li>
+          <li>
+            <strong>Smart Contracts (Chaincode):</strong> Hyperledger Fabric
+            uses smart contracts known as "chaincode" to define the logic of
+            transactions. Chaincode runs on a network of nodes called peers.
+          </li>
+          <li>
+            <strong>Private Channels:</strong> It supports private channels,
+            enabling a group of participants to create a separate ledger of
+            transactions. This feature is crucial for scenarios where
+            confidential data needs to be shared only with certain participants.
+          </li>
+          <li>
+            <strong>Pluggable Consensus:</strong> Hyperledger Fabric provides
+            flexibility in consensus mechanisms, allowing users to choose the
+            best consensus for their application. For example, it can use
+            Kafka-based ordering or other consensus methods.
+          </li>
+          <li>
+            <strong>Identity Management and Access Control:</strong> Fabric
+            includes built-in identity management, which allows for strict
+            access control and the ability to perform audits. This feature is
+            managed through the Membership Service Provider (MSP).
+          </li>
+        </ul>
+
+        <h2 style="color: #1a50ad">
+          Hyperledger Fabric Architecture Components
+        </h2>
+        <p>
+          Hyperledger Fabric has a unique architecture that separates different
+          roles and components, which are designed to handle specific tasks
+          within the blockchain network. Here are the main components:
+        </p>
+        <ul class="lists">
+          <li>
+            <strong>Peer Nodes:</strong> These are the fundamental building
+            blocks of the Fabric network. Peers maintain the ledger and run
+            smart contracts (called chaincode). They come in two primary types:
+            <ul class="lists">
+              <li>
+                <strong>Endorsing Peers:</strong> These peers simulate and
+                endorse transactions based on the chaincode logic. They do not
+                update the ledger immediately; they provide signatures to
+                validate the transaction.
+              </li>
+              <li>
+                <strong>Committing Peers:</strong> These peers validate the
+                endorsed transactions and commit them to the ledger. A peer can
+                act as both endorsing and committing peer.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Ordering Service Nodes:</strong> These nodes are responsible
+            for ordering the transactions in the network. They collect endorsed
+            transactions, package them into blocks, and deliver these blocks to
+            committing peers. Hyperledger Fabric uses pluggable consensus
+            mechanisms for ordering transactions, such as Kafka or Raft.
+          </li>
+          <li>
+            <strong>Shared Ledger:</strong> Each peer in the network maintains a
+            copy of the ledger. The ledger has two parts:
+            <ul class="lists">
+              <li>
+                <strong>World State:</strong> A database (usually CouchDB or
+                LevelDB) that holds the current state of the assets as a
+                key-value store.
+              </li>
+              <li>
+                <strong>Blockchain:</strong> A log of all transactions that have
+                led to the current world state, stored as an append-only chain
+                of blocks.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Chaincode (Smart Contracts):</strong> These are the smart
+            contracts in Hyperledger Fabric. They define the business logic that
+            governs transactions. Chaincode is executed by endorsing peers
+            during transaction proposal processing.
+          </li>
+          <li>
+            <strong>Membership Service Provider (MSP):</strong> Manages
+            identities and access control within the network. It authenticates
+            and authorizes participants, ensuring that only known and trusted
+            identities can interact with the network.
+          </li>
+          <li>
+            <strong>Channels:</strong> Hyperledger Fabric allows the creation of
+            separate channels to maintain privacy. A channel is a private subnet
+            of communication between two or more specific network members. Each
+            channel has its own ledger and can deploy its own chaincode.
+          </li>
+          <li>
+            <strong>Organizations:</strong> A network consists of multiple
+            organizations, each owning and managing certain peers. This
+            structure enables decentralized governance of the network.
+          </li>
+        </ul>
+
+        <h2 style="color: #1a50ad">Transaction Flow in Hyperledger Fabric</h2>
+        <p>
+          The transaction flow in Hyperledger Fabric is a sequence of steps from
+          transaction proposal to commitment on the ledger. Here’s a
+          step-by-step description of how transactions are processed:
+        </p>
+        <ol>
+          <li>
+            <strong>Transaction Proposal:</strong> A client application
+            initiates a transaction by sending a proposal to one or more
+            endorsing peers. The proposal contains the transaction details and
+            the requested changes. The endorsing peers simulate the transaction
+            using the chaincode but do not immediately commit the transaction to
+            the ledger.
+          </li>
+          <li>
+            <strong>Endorsement:</strong> Endorsing peers execute the
+            transaction simulation and generate a response containing the
+            proposed transaction's read and write sets. Each endorsing peer
+            signs the response to endorse it and sends it back to the client.
+          </li>
+          <img
+            src="./assets/hyperledger-fabric-flow.png"
+            alt="Hyperledger Fabric Flow"
+            style="max-width: 100%"
+          />
+          <li>
+            <strong>Transaction Submission:</strong> The client collects the
+            endorsements from multiple peers (as required by the endorsement
+            policy). The endorsed transaction proposal is then sent to the
+            ordering service.
+          </li>
+          <li>
+            <strong>Ordering:</strong> The ordering service receives
+            transactions from various clients and orders them into blocks. The
+            ordered transactions are grouped into blocks and sent to all
+            committing peers.
+          </li>
+          <li>
+            <strong>Validation:</strong> Committing peers validate the
+            transactions within a block against the endorsement policies and
+            check for conflicts. Validation ensures that all transactions
+            conform to the network's endorsement policy and that no
+            double-spending or conflicts occur.
+          </li>
+          <li>
+            <strong>Commitment:</strong> Once validated, the committing peers
+            append the block of valid transactions to their local copy of the
+            blockchain. The world state is updated based on the write sets of
+            the committed transactions.
+          </li>
+          <li>
+            <strong>Event Emission:</strong> After committing the transactions,
+            peers emit events to notify client applications about the successful
+            or failed processing of transactions.
+          </li>
+        </ol>
+
+        <h3>Consensus</h3>
+        <p>
+          <strong>Pluggable Consensus:</strong> Hyperledger Fabric supports a
+          modular approach to consensus. It separates the transaction
+          endorsement and ordering processes, allowing different consensus
+          mechanisms to be plugged in. This separation provides flexibility to
+          use different consensus mechanisms depending on the use case. For
+          example, Fabric can use a crash fault-tolerant (CFT) ordering service
+          like Kafka or a byzantine fault-tolerant (BFT) ordering service.
+        </p>
+
+        <h3>Smart Contracts</h3>
+        <p>
+          <strong>Chaincode:</strong> In Hyperledger Fabric, smart contracts are
+          called chaincode. They define the business logic and rules for
+          transactions. Chaincode runs within a Docker container on the
+          endorsing peers. Chaincode functions can perform CRUD operations on
+          the world state and emit events.
+        </p>
+
+        <h2 style="color: #1a50ad">Features Unique to Hyperledger Fabric</h2>
+        <ul class="lists">
+          <li>
+            <strong>General-Purpose Smart Contracts:</strong> Hyperledger Fabric
+            supports the execution of general-purpose smart contracts, allowing
+            for complex business logic. In contrast, Hyperledger Aries and Indy
+            are specialized for identity management and lack built-in mechanisms
+            for executing arbitrary business logic.
+          </li>
+          <li>
+            <strong>Access Control Mechanism:</strong> Hyperledger Fabric
+            provides a comprehensive access control mechanism, including
+            transaction-level access control and private channels. Aries focuses
+            on secure communication and credential exchange, while Indy, though
+            permissioned, is primarily centered on identity management without
+            extensive access control features.
+          </li>
+          <li>
+            <strong>Private Data Collections:</strong> Fabric supports private
+            data collections, offering controlled, shared data isolation. Aries
+            and Indy handle private data but do not provide the same level of
+            controlled data isolation as Fabric.
+          </li>
+          <li>
+            <strong>Rich Query Capabilities:</strong> Fabric enables rich
+            querying on ledger data via CouchDB, facilitating complex queries on
+            the state database. Aries lacks built-in ledger querying support,
+            focusing instead on identity and credential exchange. Indy supports
+            identity-specific queries but does not offer general-purpose rich
+            query capabilities like Fabric.
+          </li>
+          <li>
+            <strong>Consensus Protocol Flexibility:</strong> Fabric supports
+            flexible consensus mechanisms, allowing customization according to
+            use case requirements. Indy utilizes the Plenum consensus protocol,
+            which is tailored for identity transactions and does not offer the
+            same flexibility in consensus mechanism customization. Additionally,
+            Indy does not have a concept of private channels.
+          </li>
+          <li>
+            <strong>Transaction Endorsement Policies:</strong> Hyperledger
+            Fabric supports complex transaction endorsement policies. Indy, with
+            its focus on identity management, handles simpler transactions and
+            basic endorsement policies but lacks the flexibility seen in
+            general-purpose platforms like Fabric.
+          </li>
+        </ul>
+
+        <h3>Conclusion</h3>
+        <p>
+          Hyperledger Fabric is a powerful and flexible blockchain framework
+          that is well-suited for various enterprise applications. Its
+          permissioned network, modular design, and support for private channels
+          make it a popular choice for organizations looking to leverage
+          blockchain technology for secure and scalable solutions. With its
+          robust identity management, consensus mechanisms, and smart contract
+          capabilities, Hyperledger Fabric provides a comprehensive platform for
+          building and deploying blockchain applications across industries.
+        </p>
+      </article>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Sarath Molathoti. All rights reserved.</p>
+        <div class="social-links">
+          <a href="https://x.com/MolathotiSarath?s=09"
+            ><i class="fab fa-twitter"></i> Twitter</a
+          >
+          |
+          <a
+            href="https://www.linkedin.com/in/molathoti-sarath-2276ba145?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            ><i class="fab fa-linkedin-in"></i> LinkedIn</a
+          >
+          |
+          <a
+            href="https://www.instagram.com/thisis_sarath_m?igsh=MTR3eGlpdHl0aGFpNQ=="
+            ><i class="fab fa-instagram"></i> Instagram</a
+          >
+        </div>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
