@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NGINX Configuration</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <h1>sarathmolathoti.me</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../contact.html">Categories</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="search-bar">
+          <form id="search-form">
+            <input type="text" id="search-input" placeholder="Search..." />
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <article class="blog-post">
+        <h1>A Comprehensive Guide to NGINX Configuration</h1>
+        <p>Posted on September 28, 2024</p>
+        <div class="tags">
+          <span class="tag">NGINX</span>
+          <span class="tag">Configuration</span>
+          <span class="tag">Basics</span>
+        </div>
+        <h2>What is a Web Server?</h2>
+        <p>
+          A web server is a computer system that hosts websites and delivers web
+          pages to users' browsers when they type in a website's URL (like
+          www.example.com). It works by responding to requests from web browsers
+          (like Chrome, Firefox, etc.) and sending the appropriate web page
+          back. The web server listens to requests, finds the required files
+          (like HTML, images, etc.), and sends them back to the user over the
+          internet.
+        </p>
+        <b>Example of a simple web request:</b>
+        <ol>
+          <li>You type "www.example.com" in your browser.</li>
+          <li>
+            The browser sends a request to the web server hosting that website.
+          </li>
+          <li>
+            The web server looks for the files (HTML, CSS, etc.) for that
+            website.
+          </li>
+          <li>
+            It sends those files back to your browser, which displays the
+            website.
+          </li>
+        </ol>
+        <h2>What is Nginx?</h2>
+        <p>
+          Nginx (pronounced 'Engine-X') is one of the most popular web servers
+          used today. It’s known for being fast, reliable, and able to handle
+          many requests at once. Apart from serving web pages, Nginx can also be
+          used as a reverse proxy, load balancer, and more. Nginx is
+          particularly good at serving static files like images, CSS, and
+          JavaScript quickly and efficiently.
+        </p>
+
+        <h2>1. NGINX Directives and Contexts</h2>
+        <h3>Directives:</h3>
+        <p>
+          Directives are the building blocks of NGINX configuration. A directive
+          is a command that defines specific behaviors or settings for NGINX. It
+          consists of a keyword followed by parameters and ends with a semicolon
+          (<code>;</code>).
+        </p>
+
+        <p>Example:</p>
+        <pre><code>worker_processes 4;</code></pre>
+        <p>This directive tells NGINX to use 4 worker processes.</p>
+
+        <h3>Context:</h3>
+        <p>
+          A context groups directives and applies them to specific blocks of
+          configuration. Common contexts include:
+        </p>
+        <ul>
+          <li>
+            <code>http {}</code>: Contains HTTP server-wide configurations.
+          </li>
+          <li>
+            <code>server {}</code>: Contains settings specific to a virtual host
+            or domain.
+          </li>
+          <li><code>location {}</code>: Defines rules for specific URIs.</li>
+        </ul>
+
+        <p>Example:</p>
+        <pre><code>
+  http {
+      server {
+          listen 80;
+          server_name example.com;
+          
+          location / {
+              root /var/www/html;
+              index index.html;
+          }
+      }
+  }
+      </code></pre>
+        <p>
+          This configuration tells NGINX to listen on port 80 and serve files
+          from
+          <code>/var/www/html</code> for requests to example.com.
+        </p>
+
+        <h2>2. MIME Types</h2>
+        <p>
+          MIME types help browsers handle files appropriately by indicating the
+          type of file being served. For example, <code>.html</code> files
+          should be served as <code>text/html</code>, and images like
+          <code>.jpg</code> as <code>image/jpeg</code>.
+        </p>
+        <p>
+          In NGINX, MIME types are usually defined in the
+          <code>mime.types</code> file:
+        </p>
+        <pre><code>
+  http {
+      include /etc/nginx/mime.types;
+      default_type application/octet-stream;
+  }
+      </code></pre>
+        <p>
+          The <code>default_type</code> directive sets a default MIME type when
+          one cannot be determined.
+        </p>
+
+        <h2>3. Root vs Alias with Example</h2>
+        <h3>Root:</h3>
+        <p>
+          The <code>root</code> directive appends the URI requested by the
+          client to the specified root directory.
+        </p>
+
+        <p>Example:</p>
+        <pre><code>
+  location /images/ {
+      root /var/www/html;
+  }
+      </code></pre>
+        <p>
+          If a client requests <code>/images/photo.jpg</code>, NGINX will look
+          for the file in <code>/var/www/html/images/photo.jpg</code>.
+        </p>
+
+        <h3>Alias:</h3>
+        <p>
+          The <code>alias</code> directive replaces the location block’s URI
+          with the specified directory.
+        </p>
+
+        <p>Example:</p>
+        <pre><code>
+  location /downloads/ {
+      alias /var/www/static/;
+  }
+      </code></pre>
+        <p>
+          If a client requests <code>/downloads/file.txt</code>, NGINX will
+          serve the file from <code>/var/www/static/file.txt</code>.
+        </p>
+
+        <h2>4. Redirects and Rewrites</h2>
+        <h3>Redirects:</h3>
+        <p>
+          Redirects tell the browser to visit a different URL. NGINX supports
+          several types of redirects, such as:
+        </p>
+        <ul>
+          <li>
+            <b>301 (Permanent Redirect) :</b>This tells the browser that the
+            resource has permanently moved to a new location, and it should
+            update its cache.
+          </li>
+          <li>
+            <b>302 (Found/Temporary Redirect) : </b>Indicates a temporary move,
+            but the browser should not update the URL in its cache.
+          </li>
+          <li>
+            <b>307 (Temporary Redirect) : </b>Similar to 302, but it ensures
+            that the request method remains the same (e.g., a POST request stays
+            a POST request).
+          </li>
+        </ul>
+
+        <p>
+          Example of a 301 Redirect using the <code>return</code> directive:
+        </p>
+        <pre><code>
+  server {
+      listen 80;
+      server_name old-site.com;
+      
+      location / {
+          return 301 https://new-site.com$request_uri;
+      }
+  }
+      </code></pre>
+
+        <h3>Rewrites:</h3>
+        <p>
+          The <code>rewrite</code> directive allows for modifying the request
+          URI before NGINX processes it, typically used for URL restructuring or
+          SEO.
+        </p>
+        <p>Example:</p>
+        <pre><code>
+  server {
+      location /old-page {
+          rewrite ^/old-page$ /new-page permanent;
+      }
+  }
+      </code></pre>
+
+        <h2>5. Proxy Pass and Upstream Servers</h2>
+        <p>
+          NGINX is often used as a reverse proxy, forwarding client requests to
+          backend servers. The <code>proxy_pass</code> directive facilitates
+          this.
+        </p>
+
+        <h3>Upstream Servers:</h3>
+        <p>
+          When NGINX is used to load balance traffic between multiple backend
+          servers, the <code>upstream</code> block defines a pool of servers.
+        </p>
+        <p>Example:</p>
+        <pre><code>
+  upstream backend {
+      server backend1.example.com;
+      server backend2.example.com;
+  }
+  
+  server {
+      listen 80;
+      server_name example.com;
+  
+      location /api/ {
+          proxy_pass http://backend;
+      }
+  }
+      </code></pre>
+
+        <h2>6. Additional HTTP Security Headers</h2>
+        <p>
+          Beyond basic configurations, NGINX can improve your web application's
+          security by adding HTTP security headers. These headers protect
+          against attacks such as cross-site scripting (XSS) and clickjacking.
+        </p>
+
+        <h3>Content Security Policy (CSP):</h3>
+        Helps mitigate XSS attacks by controlling which resources (scripts,
+        images, etc.) the browser is allowed to load.
+        <pre><code>
+  add_header Content-Security-Policy "default-src 'self'; script-src 'self' https://apis.example.com";
+      </code></pre>
+
+        <h3>X-Frame-Options:</h3>
+        Prevents clickjacking by controlling whether your site can be embedded
+        in an iframe.
+        <pre><code>
+  add_header X-Frame-Options "SAMEORIGIN";
+      </code></pre>
+
+        <h3>Strict-Transport-Security (HSTS):</h3>
+        Informs the browser that the website should only be accessed over HTTPS.
+        <pre><code>
+  add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+      </code></pre>
+
+        <h3>X-Content-Type-Options:</h3>
+        Prevents browsers from interpreting files as a different MIME type,
+        reducing security risks.
+        <pre><code>
+  add_header X-Content-Type-Options "nosniff";
+      </code></pre>
+
+        <h3>X-XSS-Protection:</h3>
+        Enables cross-site scripting filtering in the browser.
+        <pre><code>
+  add_header X-XSS-Protection "1; mode=block";
+      </code></pre>
+
+        <h2>Conclusion</h2>
+        <p>
+          NGINX is a highly versatile and powerful tool that can serve as a web
+          server, reverse proxy, or load balancer. Understanding how to
+          configure directives, contexts, MIME types, root, alias, redirects,
+          rewrites,
+          <code>proxy_pass</code>, and security headers allows you to set up
+          efficient and secure web applications.
+        </p>
+        <p>
+          Whether you're serving static content or managing complex traffic
+          distribution, mastering these configurations will help you effectively
+          manage your server infrastructure and security.
+        </p>
+      </article>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Sarath Molathoti. All rights reserved.</p>
+        <div class="social-links">
+          <a href="https://x.com/MolathotiSarath?s=09"
+            ><i class="fab fa-twitter"></i> Twitter</a
+          >
+          |
+          <a
+            href="https://www.linkedin.com/in/molathoti-sarath-2276ba145?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            ><i class="fab fa-linkedin-in"></i> LinkedIn</a
+          >
+          |
+          <a
+            href="https://www.instagram.com/thisis_sarath_m?igsh=MTR3eGlpdHl0aGFpNQ=="
+            ><i class="fab fa-instagram"></i> Instagram</a
+          >
+        </div>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>

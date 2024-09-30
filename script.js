@@ -51,6 +51,51 @@ function performSearch(query) {
   });
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const cards = document.querySelectorAll(".card");
+
+  cards.forEach((card) => {
+    card.addEventListener("click", function () {
+      const category = this.dataset.category; // Get the category name from data attribute
+      loadContent(category);
+    });
+  });
+
+  function loadContent(category) {
+    fetch(`content/${category}.html`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok " + response.statusText);
+        }
+        return response.text();
+      })
+      .then((htmlContent) => {
+        const mainContent = document.querySelector("body"); // Get the body element
+        const header = document.querySelector("header"); // Get the header
+        const footer = document.querySelector("footer"); // Get the footer
+
+        // Clear out the current content (except header and footer)
+        mainContent.innerHTML = "";
+
+        // Append the header
+        mainContent.appendChild(header);
+
+        // Create a div to hold the new content
+        const contentDiv = document.createElement("div");
+        contentDiv.innerHTML = htmlContent;
+
+        // Append the new content
+        mainContent.appendChild(contentDiv);
+
+        // Append the footer
+        mainContent.appendChild(footer);
+      })
+      .catch((error) => {
+        console.error("Error fetching content:", error);
+      });
+  }
+});
+
 function displaySearchResults(results, query) {
   const mainContent = document.querySelector("main");
   mainContent.innerHTML = "";

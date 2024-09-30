@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AWS Cognito: Simplified User Authentication</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <h1>sarathmolathoti.me</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../categories.html">Categories</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="search-bar">
+          <form id="search-form">
+            <input type="text" id="search-input" placeholder="Search..." />
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <article class="blog-post">
+        <h1>Introduction to AWS Cognito: Simplified User Authentication</h1>
+        <p>Posted on September 11, 2024</p>
+        <div class="tags">
+          <span class="tag">AWS</span>
+          <span class="tag">Cognito</span>
+          <span class="tag">Authentication</span>
+        </div>
+        <p>
+          In today’s world, user authentication is a critical part of any
+          application. AWS Cognito is a powerful service that simplifies the
+          process of adding secure sign-up and sign-in options for your users.
+          Whether you’re building a mobile app or a website, AWS Cognito offers
+          a reliable way to manage users without the need to create an
+          authentication system from scratch.
+        </p>
+
+        <h3>What is AWS Cognito?</h3>
+        <p>
+          AWS Cognito is a service that manages user authentication and
+          authorization for your apps. It has two main components:
+        </p>
+        <ul>
+          <li>
+            <strong>User Pools:</strong> This is where you store and manage
+            users. It allows users to sign up, sign in, and manage their
+            accounts. It also supports features like multi-factor authentication
+            (MFA), password recovery, and social login.
+          </li>
+          <li>
+            <strong>Identity Pools:</strong> This lets you grant temporary AWS
+            credentials to users to access other AWS services like S3, DynamoDB,
+            and more.
+          </li>
+        </ul>
+
+        <h3>Why Use AWS Cognito?</h3>
+        <p>
+          AWS Cognito makes it easier to handle common user management tasks. It
+          supports secure login, integrates with social providers like Google
+          and Facebook, and scales automatically to handle millions of users.
+          Plus, you don’t need to worry about maintaining infrastructure or
+          handling token management.
+        </p>
+
+        <h3>Using AWS Cognito Without the Hosted UI</h3>
+        <p>
+          AWS Cognito offers a default hosted UI for login and signup, but you
+          may want to build your own custom UI for a unique user experience. The
+          good news is that you can still use AWS Cognito’s authentication
+          features without the hosted UI by interacting directly with the API.
+        </p>
+
+        <h3>Steps to Integrate AWS Cognito with Your Custom UI</h3>
+        <h4>1. Create a User Pool</h4>
+        <p>
+          First, set up a User Pool in the AWS Cognito console. This is where
+          user accounts will be managed.
+        </p>
+
+        <h4>2. Add AWS SDK or Amplify to Your App</h4>
+        <p>
+          You can use the AWS Amplify library or AWS SDK in your app to
+          communicate with Cognito. Install the required package with the
+          following command:
+        </p>
+        <pre><code>npm install aws-amplify</code></pre>
+
+        <h4>3. Implement Sign-Up and Sign-In in Your UI</h4>
+        <p>
+          After setting up the SDK, you can build your own login and signup
+          forms. Use the following code snippets to handle user registration and
+          login:
+        </p>
+
+        <h5>Sign-Up Example</h5>
+        <pre><code>import { Auth } from 'aws-amplify';
+
+async function signUp(username, password) {
+  try {
+    const user = await Auth.signUp({
+      username,
+      password,
+      attributes: { email: 'user@example.com' },
+    });
+    console.log('Sign-up successful', user);
+  } catch (error) {
+    console.error('Error signing up', error);
+  }
+}</code></pre>
+
+        <h5>Sign-In Example</h5>
+        <pre><code>async function signIn(username, password) {
+  try {
+    const user = await Auth.signIn(username, password);
+    console.log('Sign-in successful', user);
+  } catch (error) {
+    console.error('Error signing in', error);
+  }
+}</code></pre>
+
+        <h4>4. Manage User Sessions</h4>
+        <p>
+          Once a user signs in, Cognito provides a token that you can use to
+          maintain their session. You can store this token and use it for
+          authorization in API requests.
+        </p>
+
+        <h4>5. Additional Features</h4>
+        <p>
+          AWS Cognito offers many other features like password recovery,
+          multi-factor authentication (MFA), and account verification, which can
+          also be implemented with your own UI using the AWS SDK.
+        </p>
+
+        <p>
+          By using AWS Cognito without the hosted UI, you can fully control the
+          design and user experience while still benefiting from the security
+          and scalability of Cognito’s authentication system.
+        </p>
+        <h2>References</h2>
+        <ul class="references">
+          <li>
+            <a
+              href="https://www.freecodecamp.org/news/how-to-use-aws-cognito-for-user-authentication/"
+              target="_blank"
+              style="color: blue"
+              >1.
+              https://www.freecodecamp.org/news/how-to-use-aws-cognito-for-user-authentication/</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html"
+              target="_blank"
+              style="color: blue"
+              >2.
+              https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html</a
+            >
+          </li>
+        </ul>
+      </article>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Sarath Molathoti. All rights reserved.</p>
+        <div class="social-links">
+          <a href="https://x.com/MolathotiSarath?s=09"
+            ><i class="fab fa-twitter"></i> Twitter</a
+          >
+          |
+          <a
+            href="https://www.linkedin.com/in/molathoti-sarath-2276ba145?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            ><i class="fab fa-linkedin-in"></i> LinkedIn</a
+          >
+          |
+          <a
+            href="https://www.instagram.com/thisis_sarath_m?igsh=MTR3eGlpdHl0aGFpNQ=="
+            ><i class="fab fa-instagram"></i> Instagram</a
+          >
+        </div>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
