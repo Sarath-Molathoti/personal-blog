@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Creating an Nx Workspace with Shared Components</title>
-    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../../../styles.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
@@ -22,10 +22,10 @@
         </div>
         <nav>
           <ul>
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="../categories.html">Categories</a></li>
-            <li><a href="../about.html">About</a></li>
-            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../../../index.html">Home</a></li>
+            <li><a href="../../../contact.html">Categories</a></li>
+            <li><a href="../../../about.html">About</a></li>
+            <li><a href="../../../contact.html">Contact</a></li>
           </ul>
         </nav>
         <div class="search-bar">
@@ -163,13 +163,13 @@
         <pre><code>npm install -g nx
 npx create-nx-workspace@latest my-workspace</code></pre>
         <img
-          src="./assets/workspace_creation.PNG"
+          src="../../assets/workspace_creation.PNG"
           alt="workspace_creation"
           style="max-width: 100%"
         />
         <p>Initial Project folder structure looks as follows:</p>
         <img
-          src="./assets/project_initial_setup.PNG"
+          src="../../assets/project_initial_setup.PNG"
           alt="project_initial_setup"
           style="max-width: 100%"
         />
@@ -182,7 +182,7 @@ npx create-nx-workspace@latest my-workspace</code></pre>
         <pre><code>cd my-workspace
 nx generate @nrwl/react:application project-two</code></pre>
         <img
-          src="./assets/Second_Project_Create.PNG"
+          src="../../assets/Second_Project_Create.PNG"
           alt="project_initial_setup"
           style="max-width: 100%"
         />
@@ -223,7 +223,7 @@ const CustomInput: React.FC&lt;InputFieldProps&gt; = ({ label, value, onChange }
 export default CustomInput;
 </code></pre>
         <img
-          src="./assets/custom_input_tsx.PNG"
+          src="../../assets/custom_input_tsx.PNG"
           alt="custom_input_tsx"
           style="max-width: 100%"
         />
@@ -312,12 +312,12 @@ export default App;
         <pre><code>nx serve project-one
 nx serve project-two</code></pre>
         <img
-          src="./assets/project_one_start.PNG"
+          src="../../assets/project_one_start.PNG"
           alt="project_one_start"
           style="max-width: 100%"
         />
         <img
-          src="./assets/project_one_output.PNG"
+          src="../../assets/project_one_output.PNG"
           alt="project_one_output"
           style="max-width: 100%"
         />
@@ -420,6 +420,6 @@ nx serve project-two</code></pre>
         </div>
       </div>
     </footer>
-    <script src="script.js"></script>
+    <script src="../../../script.js"></script>
   </body>
 </html>

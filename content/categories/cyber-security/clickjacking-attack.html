@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clickjacking</title>
+    <link rel="stylesheet" href="../../../styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <h1>sarathmolathoti.me</h1>
+        </div>
+        <nav>
+          <ul class="lists">
+            <li><a href="../../../index.html">Home</a></li>
+            <li><a href="../../../contact.html">Categories</a></li>
+            <li><a href="../../../about.html">About</a></li>
+            <li><a href="../../../contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="search-bar">
+          <form id="search-form">
+            <input type="text" id="search-input" placeholder="Search..." />
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+      </div>
+      <style>
+        .lists {
+          list-style-type: disc; /* Ensures bullets are shown */
+          margin-left: 20px;
+        }
+
+        li {
+          margin-bottom: 5px; /* Optional: Add spacing between items */
+        }
+      </style>
+    </header>
+
+    <main>
+      <article class="blog-post">
+        <h1>What is Clickjacking ? | Attack Example | X-Frame-Options</h1>
+        <p>Posted on September 30, 2024</p>
+        <div class="tags">
+          <span class="tag">Clickjacking</span>
+          <span class="tag">Hacking</span>
+        </div>
+
+        <p>
+          Have you ever clicked on a button or link on a website, thinking it
+          would do one thing, but it actually does something completely
+          different? This could be an example of a clickjacking attack.
+        </p>
+        <p>
+          Clickjacking, also known as a "UI redress attack," is when an attacker
+          tricks you into clicking on something on a website that you didn’t
+          intend to. This happens when a malicious website secretly places an
+          invisible or hidden layer over a real, legitimate webpage. So, when
+          you think you’re clicking on a harmless button, you’re actually
+          clicking on something dangerous or performing an action you didn’t
+          expect.
+        </p>
+
+        <h2>How Attackers Can Use Your Website in a Clickjacking Attack</h2>
+
+        <h3>1. Embedding Your Website in an Iframe</h3>
+        <p>
+          An attacker could create a malicious webpage and embed your website
+          inside an invisible or transparent iframe. An iframe is a tool used to
+          load another webpage within a webpage. Here's how it could be misused:
+        </p>
+        <ul class="lists">
+          <li>
+            The attacker embeds your website within their own malicious page
+            using an iframe.
+          </li>
+          <li>
+            The iframe is either hidden, transparent, or positioned off-screen,
+            making it invisible to the user.
+          </li>
+          <li>
+            The attacker places deceptive buttons or links over the invisible
+            iframe to lure users into clicking.
+          </li>
+        </ul>
+        <p>
+          For instance, the attacker may display a button that says, "Click here
+          to claim a free gift!" but instead of clicking the fake button, the
+          user is actually clicking on a sensitive button within your website,
+          such as "Submit payment" or "Delete account."
+        </p>
+
+        <h3>2. Performing Sensitive Actions on Your Site</h3>
+        <p>
+          Once users are unknowingly interacting with your website through the
+          malicious iframe, they might perform actions such as:
+        </p>
+        <ul class="lists">
+          <li>Submitting forms (such as changing account information).</li>
+          <li>
+            Liking posts or following accounts on your social media platform.
+          </li>
+          <li>
+            Triggering payments or transactions (if your site handles financial
+            information).
+          </li>
+          <li>Granting permissions or authorizing logins.</li>
+        </ul>
+        <p>
+          Since the user thinks they're clicking on a harmless button, they are
+          unaware that they're interacting with your website and performing
+          these actions behind the scenes.
+        </p>
+
+        <h3>3. Your Users Become Victims</h3>
+        <p>
+          The attacker could target users of your site who have already logged
+          in. For example:
+        </p>
+        <ul class="lists">
+          <li>
+            A user is logged into your website and visits the malicious site.
+          </li>
+          <li>
+            The attacker uses the iframe to trick the user into performing
+            actions while they are still authenticated on your site.
+          </li>
+          <li>
+            Since the user is logged in, your website may process these actions
+            as legitimate requests coming from the user.
+          </li>
+        </ul>
+        <p>
+          This can lead to unwanted account changes, financial losses, or even
+          compromising the user's security.
+        </p>
+
+        <h2>Steps to Perform Clickjacking Test</h2>
+        <p>
+          The idea is to see if your application can be embedded in an iframe.
+          If it loads in the iframe, it means your site is vulnerable to
+          clickjacking. Here's a step-by-step guide on how to test:
+        </p>
+
+        <h3>Create the HTML File</h3>
+        <p>
+          Open a text editor (like Notepad, Sublime Text, or VS Code). Paste the
+          following code into the file:
+        </p>
+
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Clickjacking Test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;This is a clickjacking test&lt;/h1&gt;
+    &lt;iframe src="http://your-development-server.com" width="100%" height="800"&gt;&lt;/iframe&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+        <p>
+          Replace <code>http://your-development-server.com</code> with the
+          actual URL of your React application deployed on your development
+          server. Save the file as <code>clickjacking_test.html</code> on your
+          computer.
+        </p>
+
+        <p>
+          Open <code>clickjacking_test.html</code> file in your browser, check
+          if your application loads inside the iframe.
+        </p>
+
+        <h3>Expected results:</h3>
+        <ul class="lists">
+          <li>
+            <strong>If the page loads successfully in the iframe:</strong> This
+            indicates your application may be vulnerable to clickjacking.
+          </li>
+        </ul>
+
+        <img
+          src="../../assets/clickjacking-sample-code.PNG"
+          alt="clickjacking-sample-code"
+          style="max-width: 100%"
+        />
+
+        <img
+          src="../../assets/clickjacking-sample-exec.PNG"
+          alt="clickjacking-sample-exec"
+          style="max-width: 100%"
+        />
+
+        <p>
+          To demonstrate how clickjacking works (in a controlled environment),
+          you can add a transparent layer over an <code>iframe</code> to show
+          how users could be tricked into clicking on its contents.
+        </p>
+
+        <h3>HTML Code for Clickjacking Test</h3>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Clickjacking Simulation&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;This is a clickjacking test&lt;/h1&gt;
+    &lt;div style="position: relative; width: 100%; height: 800px;"&gt;
+        &lt;iframe src="http://your-development-server.com" width="100%" height="800" style="position: absolute; z-index: 1;"&gt;&lt;/iframe&gt;
+        &lt;div style="position: absolute; top: 0; left: 0; width: 100%; height: 800px; background: rgba(255, 0, 0, 0.3); z-index: 2;"&gt;
+            &lt;a href="#" style="padding: 15px 30px; background-color: #28a745; color: white; text-decoration: none; font-size: 18px; border-radius: 
+            5px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); text-align: center;""&gt;VIEW OFFERS&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+        <p>
+          The above code overlays a semi-transparent red box over the
+          <code>iframe</code>, simulating a clickjacking attack by tricking
+          users into thinking they're clicking on something benign, while they
+          might actually be clicking on a button or link inside the
+          <code>iframe</code>.
+        </p>
+
+        <img
+          src="../../assets/clickjacking-extra-code.PNG"
+          alt="clickjacking-EXTRA-code"
+          style="max-width: 100%"
+        />
+
+        <img
+          src="../../assets/clickjacking-extra-exec.PNG"
+          alt="clickjacking-extra-exec"
+          style="max-width: 100%"
+        />
+
+        <ul class="lists">
+          <li>
+            <strong
+              >If the page is blocked or does not load in the iframe:</strong
+            >
+            You should see a blank or error page within the iframe, indicating
+            the site is protected (likely due to headers like X-Frame-Options or
+            Content-Security-Policy).
+          </li>
+        </ul>
+
+        <p>
+          For example, in Chrome Developer Tools (F12), you might see an error
+          message like:
+        </p>
+        <pre><code>Refused to frame 'http://your-development-server.com' because an ancestor violates the following Content Security Policy directive: "frame-ancestors 'self'".</code></pre>
+        <pre><code>Refused to display 'http://your-development-server.com' in a frame because it set 'X-Frame-Options' to 'DENY'.</code></pre>
+        <img
+          src="../../assets/clickjacking-handled-website.PNG"
+          alt="clickjacking-handled-website"
+          style="max-width: 100%"
+        />
+        <img
+          src="../../assets/clickjacking-handled-exec.PNG"
+          alt="clickjacking-handled-exec"
+          style="max-width: 100%"
+        />
+        <h2>Why Is This Dangerous for Your Website?</h2>
+        <p>
+          A clickjacking attack can seriously harm your website and its users.
+          Here’s why:
+        </p>
+        <ul class="lists">
+          <li>
+            <strong>Loss of Trust:</strong> If users realize they were tricked
+            into performing unintended actions on your website, they will lose
+            trust in your platform.
+          </li>
+          <li>
+            <strong>Security Breaches:</strong> Clickjacking can lead to
+            security breaches, where attackers gain unauthorized access to
+            sensitive data or accounts.
+          </li>
+          <li>
+            <strong>Reputation Damage:</strong> If your website is exploited in
+            a clickjacking attack, it could damage your company’s reputation and
+            lead to negative press.
+          </li>
+        </ul>
+
+        <h2>How to Prevent Clickjacking on Your Website</h2>
+        <p>
+          Luckily, there are ways to protect your website from clickjacking
+          attacks. Here are some best practices:
+        </p>
+
+        <h3>1. Use the X-Frame-Options Header</h3>
+        <p>
+          The X-Frame-Options HTTP header is a simple and effective way to
+          prevent your website from being loaded inside an iframe, which is the
+          main method attackers use for clickjacking.
+        </p>
+        <p>
+          Set this header to "DENY" to block all iframes, or "SAMEORIGIN" to
+          allow iframes only from your own domain.
+        </p>
+        <p><strong>Example:</strong></p>
+        <pre><code>X-Frame-Options: DENY</code></pre>
+
+        <h3>2. Use Content Security Policy (CSP)</h3>
+        <p>
+          Another way to protect against clickjacking is by using the Content
+          Security Policy (CSP) header. CSP can control which resources a
+          webpage is allowed to load, including frames.
+        </p>
+        <p>
+          You can add the following directive to your website's CSP to prevent
+          framing:
+        </p>
+        <pre><code>Content-Security-Policy: frame-ancestors 'self';</code></pre>
+
+        <h3>3. Regularly Monitor Your Website for Vulnerabilities</h3>
+        <p>
+          It’s important to stay proactive about security. Regularly audit your
+          website for vulnerabilities, and ensure your software and libraries
+          are updated to their latest versions to minimize security risks.
+        </p>
+
+        <h3>4. Educate Your Users</h3>
+        <p>
+          Educating your users about potential risks can help them avoid falling
+          victim to clickjacking attacks. Encourage them to be cautious when
+          clicking on suspicious links or visiting untrustworthy websites.
+        </p>
+
+        <h2>Conclusion</h2>
+        <p>
+          Clickjacking is a sneaky attack that can exploit your website and harm
+          your users. Attackers can embed your website in hidden frames and
+          trick users into performing dangerous actions without realizing it. To
+          prevent this, it's essential to implement security measures like the
+          X-Frame-Options and CSP headers, as well as regularly monitor your
+          website for vulnerabilities. By taking these precautions, you can
+          protect your website and ensure a safer browsing experience for your
+          users.
+        </p>
+
+        <p>Stay secure and safeguard your platform!</p>
+      </article>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Sarath Molathoti. All rights reserved.</p>
+        <div class="social-links">
+          <a href="https://x.com/MolathotiSarath?s=09"
+            ><i class="fab fa-twitter"></i> Twitter</a
+          >
+          |
+          <a
+            href="https://www.linkedin.com/in/molathoti-sarath-2276ba145?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            ><i class="fab fa-linkedin-in"></i> LinkedIn</a
+          >
+          |
+          <a
+            href="https://www.instagram.com/thisis_sarath_m?igsh=MTR3eGlpdHl0aGFpNQ=="
+            ><i class="fab fa-instagram"></i> Instagram</a
+          >
+        </div>
+      </div>
+    </footer>
+    <script src="../../../script.js"></script>
+  </body>
+</html>

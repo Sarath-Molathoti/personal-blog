@@ -12,17 +12,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function performSearch(query) {
-  const contentFolder = "content/";
+  const contentFolder = "content/categories/";
   const files = [
-    "linux-commands.html",
-    "docker-commands.html",
-    "code-layout-python-standards.html",
-    "whitespace-commas-python-standards.html",
-    "jenkins-setup-on-debian.html",
-    "build-spring-project-using-jenkins.html",
-    "nx-monorepo-setup.html",
-    "deployment-strategies-in-devops.html",
-    "hyperledger-fabric-basics.html",
+    "linux/linux-commands.html",
+    "devops/docker-commands.html",
+    "python/code-layout-python-standards.html",
+    "python/whitespace-commas-python-standards.html",
+    "devops/jenkins-setup-on-debian.html",
+    "devops/build-spring-project-using-jenkins.html",
+    "web-development/nx-monorepo-setup.html",
+    "web-development/nginx-configuration.html",
+    "devops/deployment-strategies-in-devops.html",
+    "blockchain/hyperledger-fabric-basics.html",
+    "cloud-computing/aws-cognito.html",
+    "cyber-security/clickjacking-attack.html",
     // Add more file names as needed
   ];
 
