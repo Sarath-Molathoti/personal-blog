@@ -55,7 +55,7 @@ function performSearch(query) {
 }
 
 function displaySearchResults(results, query) {
-  const mainContent = document.querySelector("main");
+  const mainContent = document.getElementById("main-content");
   mainContent.innerHTML = "";
 
   if (results.length > 0) {
