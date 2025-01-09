@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CAP Theorm</title>
+    <link rel="stylesheet" href="../../../styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <h1>sarathmolathoti.me</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="../../../index.html">Home</a></li>
+            <li><a href="../../../contact.html">Categories</a></li>
+            <li><a href="../../../about.html">About</a></li>
+            <li><a href="../../../contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="search-bar">
+          <form id="search-form">
+            <input type="text" id="search-input" placeholder="Search..." />
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <article class="blog-post">
+        <h1>Understanding the CAP Theorem in Distributed Systems</h1>
+        <p>Posted on November 4, 2024</p>
+        <div class="tags">
+          <span class="tag">Docker</span>
+          <span class="tag">Commands</span>
+          <span class="tag">Basics</span>
+        </div>
+        <p>
+          In the world of distributed systems, where data needs to be stored and
+          accessed across multiple servers or nodes, ensuring the system’s
+          reliability, performance, and consistency can be quite challenging. To
+          address these challenges, computer scientist Eric Brewer introduced
+          the CAP theorem, which has become a fundamental concept in the design
+          and operation of distributed systems. In this blog, we’ll delve into
+          the CAP theorem, exploring what it is, its implications, and how it
+          influences the design choices of distributed databases.
+        </p>
+
+        <h2>What is CAP Theorem?</h2>
+        <p>
+          The CAP theorem, also known as Brewer’s theorem, was introduced by
+          Eric Brewer in 2000. The three letters in the CAP theorem stand for:
+        </p>
+        <ul>
+          <li><strong>C</strong>: Consistency</li>
+          <li><strong>A</strong>: Availability</li>
+          <li><strong>P</strong>: Partition Tolerance</li>
+        </ul>
+        <p>
+          The theorem articulates the inherent trade-offs that exist when
+          designing distributed systems.
+        </p>
+
+        <h3>Statement of CAP theorem</h3>
+        <img
+          src="../../assets/cap-theorm.webp"
+          alt="CAP Theorm"
+          style="max-width: 100%"
+        />
+        <p>
+          The CAP theorem states that it is not possible to guarantee all three
+          of the desirable properties — consistency, availability, and partition
+          tolerance at the same time in a distributed system with data
+          replication.
+        </p>
+
+        <h3>Consistency</h3>
+        <p>
+          In a distributed system, consistency means that all nodes or replicas
+          in the system have the same data at the same time. When a client reads
+          data, it receives the most recent write or an error. In other words,
+          there is no divergence in the data observed by different nodes.
+        </p>
+        <p>
+          Suppose we are working on a distributed system having client node and
+          two database nodes say d1 and d2 . Now let’s say we have generated an
+          update request to d1 and at the same time we have generated a read
+          request at d2 . So here due to replication of data between d1 and d2
+          we are able to access latest data . This is called consistency .
+        </p>
+        <img
+          src="../../assets/cap-consistency.webp"
+          alt="Consistency"
+          style="max-width: 100%"
+        />
+
+        <h3>Availability</h3>
+        <p>
+          Availability refers to the system’s ability to respond to client
+          requests, even in the presence of node failures or network partitions.
+          An available system ensures that every request eventually receives a
+          response, though it doesn’t guarantee that the response contains the
+          most recent data.
+        </p>
+
+        <h3>Partition Tolerance</h3>
+        <p>
+          Partition tolerance deals with the system’s ability to continue
+          functioning even when network partitions occur. Network partitions can
+          cause nodes to lose contact with one another, making communication and
+          synchronization difficult.
+        </p>
+        <p>
+          Suppose somehow the connection between d1 and d2 breaks down now the
+          replication of data will not occur hence consistency is not maintained
+          but still both systems are generating output. This is partition
+          tolerance. So even after connection breakdown the output is being
+          generated by systems is partition tolerance.
+        </p>
+        <img
+          src="../../assets/cap-partition-tolerance.webp"
+          alt="Partition Tolerance"
+          style="max-width: 100%"
+        />
+        <p>
+          CAP theorem says that we cannot have all three properties i.e. C A P
+          at same time we can have at most two at once . So let’s understand
+          this . All possible combinations of consistency , availability and
+          partition tolerance are CA (consistency + availability ) , AP
+          (availability + partition tolerance ) and CP (consistency + partition
+          tolerance ) .
+        </p>
+
+        <h2>CAP Theorem Combinations</h2>
+        <ul>
+          <li>
+            <strong>CA (Consistency + Availability)</strong>: Here, the complete
+            system is consistent and always available. However, if we break the
+            connection between systems to introduce partition tolerance, we lose
+            consistency.
+          </li>
+          <img
+            src="../../assets/cap-ca.webp"
+            alt="CAP CA"
+            style="max-width: 100%"
+          />
+          <li>
+            <strong>AP (Availability + Partition Tolerance)</strong>: In this
+            case, the system is partition tolerant and always available, but
+            consistency is not guaranteed.
+          </li>
+          <img
+            src="../../assets/cap-ap.webp"
+            alt="CAP AP"
+            style="max-width: 100%"
+          />
+          <li>
+            <strong>CP (Consistency + Partition Tolerance)</strong>: This
+            combination ensures consistency and partition tolerance but may
+            sacrifice availability when a connection needs to be re-established.
+          </li>
+          <img
+            src="../../assets/cap-cp.webp"
+            alt="CAP CP"
+            style="max-width: 100%"
+          />
+        </ul>
+
+        <h3>Why is the CAP theorem important?</h3>
+        <p>
+          The CAP theorem is important because it forces developers to think
+          carefully about the trade-offs they’re making when building a
+          distributed system. When designing a distributed system, you have to
+          decide which two properties are most important for your use case.
+        </p>
+        <p>
+          For example, if you’re building a banking application, consistency is
+          likely to be the most important property because you can’t afford to
+          have different account balances for different users. On the other
+          hand, if you’re building a social media application, availability is
+          likely to be the most important property because users will expect the
+          application to be up and running all the time.
+        </p>
+
+        <h3>Real-World Examples</h3>
+        <ul>
+          <li>
+            <strong>Amazon DynamoDB</strong>: DynamoDB is designed to provide
+            high availability and partition tolerance, replicating data across
+            multiple Availability Zones to ensure data durability and
+            availability.
+          </li>
+          <li>
+            <strong>Google Spanner</strong>: Google’s Spanner database is an
+            example of a CP system, achieving strong consistency but with
+            potential unavailability during network partitions.
+          </li>
+        </ul>
+        <h1>References</h1>
+        <ol>
+          <li>
+            <a
+              href="https://medium.com/@ngneha090/understanding-the-cap-theorem-balancing-consistency-availability-and-partition-cb11c2b97e2b"
+              style="color: blue"
+              >https://medium.com/@ngneha090/understanding-the-cap-theorem-balancing-consistency-availability-and-partition-cb11c2b97e2b</a
+            >
+          </li>
+        </ol>
+      </article>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Sarath Molathoti. All rights reserved.</p>
+        <div class="social-links">
+          <a href="https://x.com/MolathotiSarath?s=09"
+            ><i class="fab fa-twitter"></i> Twitter</a
+          >
+          |
+          <a
+            href="https://www.linkedin.com/in/molathoti-sarath-2276ba145?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            ><i class="fab fa-linkedin-in"></i> LinkedIn</a
+          >
+          |
+          <a
+            href="https://www.instagram.com/thisis_sarath_m?igsh=MTR3eGlpdHl0aGFpNQ=="
+            ><i class="fab fa-instagram"></i> Instagram</a
+          >
+        </div>
+      </div>
+    </footer>
+    <script src="../../../script.js"></script>
+  </body>
+</html>
