@@ -62,7 +62,7 @@ function displaySearchResults(results, query) {
     results.forEach((result) => {
       const resultElement = document.createElement("article");
       resultElement.innerHTML = `
-                <h2><a href="content/${result.file}">${result.file
+                <h2><a href="content/categories/${result.file}">${result.file
         .replace(".html", "")
         .replace(/-/g, " ")}</a></h2>
                 <p>Matching content: ...${extractSnippet(
