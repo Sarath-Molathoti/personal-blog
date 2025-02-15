@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NGINX Configuration Guide</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="main.css" />
+    <style>
+      :root {
+        --primary-color: #051e30;
+        --secondary-color: #1a3350;
+        --accent-color: #00ff9d;
+        --text-color: #c3e4fc;
+        --transition: all 0.3s ease;
+      }
+
+      .blog-container {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - 100px);
+      }
+
+      .blog-card {
+        background: var(--secondary-color);
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        padding: 35px;
+        margin: 20px 0;
+        backdrop-filter: blur(10px);
+      }
+
+      .post-date {
+        display: block;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 14px;
+        color: #74b8ff; /* Changed the color to a nice light blue */
+        letter-spacing: -0.02em;
+        text-align: left;
+        margin: 10px 0 20px 0;
+        padding: 3px 0;
+        opacity: 0.8;
+        font-weight: 400;
+        max-width: max-content;
+      }
+      /* Remove any unwanted lines or sections */
+      .card-header {
+        margin-bottom: 10px;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      h1 {
+        font: 40px/1 "Space Grotesk", sans-serif;
+        margin-bottom: 30px;
+        color: var(--accent-color);
+        text-transform: capitalize;
+        letter-spacing: -0.05em;
+        animation: fadeDown 0.6s ease;
+      }
+
+      h2 {
+        font: 22px "Space Grotesk", sans-serif;
+        margin: 30px 0;
+        color: var(--accent-color);
+        border-bottom: 2px solid rgba(0, 255, 157, 0.2);
+        padding-bottom: 10px;
+        animation: slideIn 0.4s ease;
+      }
+
+      h3 {
+        font-size: 18px;
+        margin: 5px 0 10px 0;
+        color: var(--text-color);
+        font-weight: 600;
+      }
+
+      p {
+        font-family: "Inter", sans-serif;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        opacity: 0.98;
+      }
+
+      .ordered-list,
+      .unordered-list {
+        counter-reset: list;
+        padding-left: 30px;
+        margin: 20px 0;
+        animation: fadeUp 0.4s ease;
+      }
+
+      .list {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        counter-increment: list;
+      }
+
+      .list::before {
+        content: "- ";
+        color: var(--accent-color);
+        margin-right: 10px;
+      }
+
+      pre {
+        animation: slideLeft 0.6s ease;
+        background: hsl(0, 0%, 9%);
+        border-left: 4px solid var(--accent-color);
+        color: var(--text-color);
+        padding: 0px 20px;
+        overflow-x: auto;
+        font-size: 0.95em;
+        border-radius: 8px;
+        margin: 30px 0;
+        backdrop-filter: blur(5px);
+      }
+
+      .subCode {
+        animation: slideUp 0.4s ease;
+        font-family: "SFMono-Regular", monospace;
+        background: rgba(15, 35, 55, 0.7);
+        color: var(--accent-color);
+        padding: 0.2rem 0.5rem;
+        border-radius: 3px;
+        display: inline-block;
+        margin: 0 5px;
+        border: 1px solid rgba(0, 255, 157, 0.2);
+      }
+
+      @keyframes fadeDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideLeft {
+        from {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        background: hsl(236, 93%, 9%);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: hsl(236, 93%, 15%);
+        border-radius: 4px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 18px;
+        text-align: left;
+      }
+      table th, table td {
+        padding: 12px;
+        border: 1px solid #ffffff33;
+      }
+      table th {
+        background: #001a3a;
+        color: #00ff9d;
+      }
+      table tr:nth-child(even) {
+        background: #0a192f;
+      }
+      table tr:nth-child(odd) {
+        background: #001a3a;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">Sarath Molathoti</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <main class="blog-container">
+        <article class="blog-card">
+          <div class="card-header">
+            <h1 class="blog-card-title">
+              AI vs ML vs DL vs LLM vs Generative AI: Understanding the Differences
+            </h1>
+          </div>
+      
+      
+          <p>In the world of technology, terms like <strong>Artificial Intelligence (AI), Machine Learning (ML), Deep Learning (DL), Large Language Models (LLM),</strong> and <strong>Generative AI (Gen AI)</strong> are often used interchangeably. However, they each have distinct meanings and purposes. In this blog post, we'll break these concepts down in simple terms so that even beginners can understand them.</p>
+      
+          <h2>1. What is AI (Artificial Intelligence)?</h2>
+      
+          <p><strong>AI (Artificial Intelligence)</strong> is the broadest term that refers to machines or computers that can perform tasks that typically require human intelligence. These tasks include problem-solving, decision-making, speech recognition, and language understanding.</p>
+      
+          <p><strong>Examples:</strong></p>
+          <ul class="unordered-list">
+            <li>Voice assistants like <strong>Siri</strong> or <strong>Alexa</strong></li>
+            <li>Chatbots used in customer service</li>
+            <li>Self-driving cars</li>
+            <li>Recommendation systems on Netflix or YouTube</li>
+          </ul>
+      
+          <p><strong>Key Point:</strong> AI is the big umbrella under which ML, DL, LLMs, and Gen AI fall.</strong></p>
+      
+          <h2>2. What is ML (Machine Learning)?</h2>
+      
+          <p><strong>Machine Learning (ML)</strong> is a subset of AI that focuses on enabling computers to learn from data without being explicitly programmed. Instead of writing rules, ML models use data to recognize patterns and improve performance over time.</p>
+      
+          <p><strong>How ML Works:</strong></p>
+          <ol class="ordered-list">
+            <li>Feed the machine with data</li>
+            <li>Train it using algorithms</li>
+            <li>Let it make predictions or decisions</li>
+            <li>Improve its accuracy over time</li>
+          </ol>
+      
+          <p><strong>Examples:</strong></p>
+          <ul class="unordered-list">
+            <li>Spam email detection</li>
+            <li>Product recommendations on Amazon</li>
+            <li>Fraud detection in banking</li>
+            <li>Personalized advertisements on social media</li>
+          </ul>
+      
+          <p><strong>Key Point:</strong> ML allows computers to learn from data and make predictions or decisions without human intervention.</strong></p>
+      
+          <h2>3. What is DL (Deep Learning)?</h2>
+      
+          <p><strong>Deep Learning (DL)</strong> is a subset of ML that focuses on using <strong>neural networks</strong> with multiple layers to process and analyze complex data. DL is inspired by how the human brain processes information.</p>
+      
+          <p><strong>How DL Works:</strong></p>
+          <ol class="ordered-list">
+            <li>Uses artificial <strong>neural networks</strong> to mimic human brain neurons</li>
+            <li>Processes vast amounts of data and identifies intricate patterns</li>
+            <li>Requires powerful hardware like GPUs to function efficiently</li>
+          </ol>
+      
+          <p><strong>Examples:</strong></p>
+          <ul class="unordered-list">
+            <li>Facial recognition (used in smartphones and security systems)</li>
+            <li>Self-driving car technology (Tesla’s autopilot)</li>
+            <li>Medical image analysis (detecting diseases from X-rays and MRIs)</li>
+            <li>Voice recognition (Google Assistant, Amazon Alexa, Apple Siri)</li>
+          </ul>
+      
+          <p><strong>Key Point:</strong> DL is a specialized form of ML that processes complex data using neural networks.</strong></p>
+
+          <h3>Difference Between Machine Learning (ML) and Deep Learning (DL)</h3>
+    <p>While <strong>Machine Learning (ML)</strong> and <strong>Deep Learning (DL)</strong> are both subsets of <strong>Artificial Intelligence (AI)</strong>, they have key differences in how they process data, learn patterns, and make decisions.</p>
+    
+    <table>
+        <tr>
+            <th>Feature</th>
+            <th>Machine Learning (ML)</th>
+            <th>Deep Learning (DL)</th>
+        </tr>
+        <tr>
+            <td><strong>Definition</strong></td>
+            <td>ML is a subset of AI that enables computers to learn from data and make decisions without being explicitly programmed.</td>
+            <td>DL is a specialized form of ML that uses artificial <strong>neural networks</strong> to process and learn from data.</td>
+        </tr>
+        <tr>
+            <td><strong>Data Dependency</strong></td>
+            <td>ML can work with small to medium-sized datasets and still perform well.</td>
+            <td>DL requires <strong>large amounts of data</strong> to train effectively.</td>
+        </tr>
+        <tr>
+            <td><strong>Processing Method</strong></td>
+            <td>Uses algorithms like Decision Trees, SVMs, Random Forest, and Regression models.</td>
+            <td>Uses multi-layered <strong>neural networks</strong> (ANNs, CNNs, RNNs, Transformers).</td>
+        </tr>
+        <tr>
+            <td><strong>Feature Extraction</strong></td>
+            <td>Requires <strong>manual feature extraction</strong>—human engineers select important features from the data.</td>
+            <td><strong>Automatically extracts features</strong> from raw data using neural networks.</td>
+        </tr>
+        <tr>
+            <td><strong>Computational Power</strong></td>
+            <td>Requires <strong>less computational power</strong>, works well on CPUs.</td>
+            <td>Requires <strong>high computational power</strong> (GPUs/TPUs) due to complex computations.</td>
+        </tr>
+        <tr>
+            <td><strong>Interpretability</strong></td>
+            <td>Easier to understand and explain decision-making.</td>
+            <td>More of a "black box"—difficult to interpret how decisions are made.</td>
+        </tr>
+        <tr>
+            <td><strong>Example Use Cases</strong></td>
+            <td>Spam detection, fraud detection, recommendation systems.</td>
+            <td>Facial recognition, autonomous driving, speech recognition.</td>
+        </tr>
+    </table>
+    
+    <h3>Key Takeaways</h3>
+    <ul>
+        <li><strong>ML models</strong> require <strong>structured data and manual feature extraction</strong>, making them interpretable and suitable for many tasks.</li>
+        <li><strong>DL models</strong> rely on <strong>neural networks</strong> to automatically extract features, making them ideal for complex tasks like image and speech recognition but requiring <strong>big data and powerful hardware</strong>.</li>
+    </ul>
+      
+          <h2>4. What is an LLM (Large Language Model)?</h2>
+      
+          <p><strong>Large Language Models (LLMs)</strong> are a type of deep learning model designed to understand and generate human-like text. They are trained on vast amounts of text data and use complex algorithms to generate coherent and meaningful responses.</p>
+      
+          <p><strong>How LLMs Work:</strong></p>
+          <ol class="ordered-list">
+            <li>Trained on billions of words from the internet, books, articles, and more.</li>
+            <li>Uses advanced DL techniques like Transformers (e.g., GPT, BERT, etc.).</li>
+            <li>Generates text, answers questions, summarizes content, and even writes code.</li>
+          </ol>
+      
+          <p><strong>Examples:</strong></p>
+          <ul class="unordered-list">
+            <li>ChatGPT (Developed by OpenAI)</li>
+            <li>Google Bard</li>
+            <li>Claude (Anthropic AI)</li>
+          </ul>
+      
+          <p><strong>Key Point:</strong> LLMs are powerful AI models trained on large text datasets to understand and generate human-like text.</p>
+      
+          <h2>5. What is Generative AI (Gen AI)?</h2>
+      
+          <p><strong>Generative AI (Gen AI)</strong> is a branch of AI that focuses on creating new content, such as text, images, music, or even videos. LLMs are a part of Gen AI, but Gen AI includes many other creative AI applications as well.</p>
+      
+          <p><strong>How Gen AI Works:</strong></p>
+          <ol class="ordered-list">
+            <li>Uses deep learning to generate new data based on training data</li>
+            <li>Can create original text, images, voice, videos, and even 3D models</li>
+            <li>Often uses models like <strong>GANs (Generative Adversarial Networks)</strong> and <strong>Transformers</strong></li>
+          </ol>
+      
+          <p><strong>Examples:</strong></p>
+          <ul class="unordered-list">
+            <li>ChatGPT (Text generation)</li>
+            <li>DALL·E (AI-generated images)</li>
+            <li>Runway ML (AI-generated videos)</li>
+            <li>Jukebox AI (Music generation)</li>
+          </ul>
+      
+          <p><strong>Key Point:</strong> Gen AI is AI that creates new, original content based on learned patterns.</strong></p>
+      
+          <h2>Summary: The Relationship Between AI, ML, DL, LLMs, and Gen AI</h2>
+      
+          <p>Think of it as a hierarchy:</p>
+          <ol class="ordered-list">
+            <li><strong>AI</strong> is the broadest category (smart systems)</li>
+            <li><strong>ML</strong> is a subset of AI (learns from data)</li>
+            <li><strong>DL</strong> is a subset of ML (uses neural networks)</li>
+            <li><strong>LLMs</strong> are a specialized form of DL (focused on language understanding)</li>
+            <li><strong>Gen AI</strong> includes LLMs but also other AI content generation techniques</li>
+          </ol>
+      
+          <h3>Summary Table:</h3>
+          <table>
+            <tr>
+              <th>Concept</th>
+              <th>What It Does</th>
+              <th>Examples</th>
+            </tr>
+            <tr>
+              <td>AI (Artificial Intelligence)</td>
+              <td>Machines mimicking human intelligence</td>
+              <td>Chatbots, self-driving cars</td>
+            </tr>
+            <tr>
+              <td>ML (Machine Learning)</td>
+              <td>Learning from data to make predictions</td>
+              <td>Spam detection, recommendation systems</td>
+            </tr>
+            <tr>
+              <td>DL (Deep Learning)</td>
+              <td>Using neural networks to process complex data</td>
+              <td>Facial recognition, voice assistance</td>
+            </tr>
+            <tr>
+              <td>LLM (Large Language Model)</td>
+              <td>AI trained on large amounts of text data</td>
+              <td>ChatGPT, Bard, Claude</td>
+            </tr>
+            <tr>
+              <td>Gen AI (Generative AI)</td>
+              <td>AI that creates new content</td>
+              <td>DALL·E, Runway ML, AI music generation</td>
+            </tr>
+          </table>
+      
+          <h2>Conclusion</h2>
+      
+          <p>While <strong>AI, ML, DL, LLMs, and Gen AI</strong> are interconnected, they each serve different purposes. AI is the overarching field, ML helps machines learn, DL uses neural networks, LLMs specialize in text, and Gen AI focuses on content creation. Understanding these distinctions will help you navigate the evolving landscape of artificial intelligence with ease.</p>
+      
+          <p>AI is revolutionizing industries from healthcare to entertainment, and understanding these distinctions is key to harnessing their potential.</p>
+        </article>
+      </main>
+  </body>
+</html>
