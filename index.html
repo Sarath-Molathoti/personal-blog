@@ -4,10 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sarath Molathoti - Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="index.css">
-  
+     <!-- Include Font Awesome -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+     <!-- Add this CSS at the end of your existing styles -->
+     <style>
+        .star {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    font-family: 'Font Awesome\ 5 Free';
+    display: inline-block; /* Ensures no extra box */
+    align-items: center;
+    justify-content: center;
+    color: #00ff9d;
+    text-shadow: 0 0 10px #00ff9d; /* Improved glow effect */
+    box-shadow: none; /* Remove unwanted box shadow */
+    background: transparent; /* Ensure transparent background */
+    border: none; /* Remove any default border */
+    pointer-events: none;
+    animation: move 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    transform-origin: 50% 50%;
+    font-size: 25px;
+}
+
+ 
+         @keyframes move {
+             0% {
+                 opacity: 0.8;
+                 transform: translateY(0) rotate(0deg);
+             }
+             100% {
+                 opacity: 0;
+                 transform: translateY(var(--ty)) translateX(var(--tx)) rotate(360deg);
+             }
+         }
+     </style>
 </head>
 <body>
     <nav class="navbar">
@@ -237,6 +271,61 @@
     <div class="copyright">
         <span style="font-weight: 300;">© 2024 Sarath Molathoti. All rights reserved.</span>
     </div>
+    <script>
+        document.addEventListener('click', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            // Number of stars (10-15)
+            const numStars = Math.floor(Math.random() * 6) + 15;
+            
+            // Create falling stars
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random angle for the star's direction
+                const angle = (Math.random() * 360) * Math.PI / 180;
+                
+                // Random distance the star should fall
+                const distance = 200 + Math.random() * 100;
+                
+                // Calculate trajectory
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                // Set animation properties
+                star.style.setProperty('--tx', tx + 'px');
+                star.style.setProperty('--ty', ty + 'px');
+                
+                // Set star icon
+                star.innerHTML = '<i class="fas fa-star"></i>';
+                
+                // Add random size variation
+                const size = Math.random() * 15 + 15;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.fontSize = size + 'px';
+                
+                // Add random animation duration (1.5-2.5 seconds)
+                const duration = 1500 + Math.random() * 1000;
+                star.style.animationDuration = duration + 'ms';
+                
+                // Set position
+                star.style.left = x + 'px';
+                star.style.top = y + 'px';
+                star.style.speed = 'auto';
+                
+                // Add to body
+                document.body.appendChild(star);
+                
+                // Remove element after animation
+                setTimeout(() => {
+                    star.remove();
+                }, duration + 500);
+            }
+        });
+    </script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script src="index.js"></script>
 </body>
