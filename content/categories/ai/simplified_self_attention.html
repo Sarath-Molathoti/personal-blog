@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comprehensive Guide to Attention Mechanism in Transformers</title>
+    <link rel="stylesheet" type="text/css" href="../../../index.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../categories/blog-post.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">Sarath Moloti</div>
+      <ul class="nav-links">
+        <li><a href="../../../index.html">Home</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <main class="blog-container">
+      <article class="blog-card">
+        <div class="container">
+          <h1>Comprehensive Guide to Attention Mechanism in Transformers</h1>
+
+          <section class="intro">
+            <h2>1. Introduction</h2>
+            <p>
+              An attention mechanism is a machine learning technique that
+              directs deep learning models to prioritize (or attend to) the most
+              relevant parts of input data. Innovation in attention mechanisms
+              enabled the transformer architecture that yielded the modern large
+              language models (LLMs) that power popular applications like
+              ChatGPT.
+            </p>
+            <p>
+              As their name suggests, attention mechanisms are inspired by the
+              ability of humans (and other animals) to selectively pay more
+              attention to salient details and ignore details that are less
+              important in the moment. Having access to all information but
+              focusing on only the most relevant information helps to ensure
+              that no meaningful details are lost while enabling efficient use
+              of limited memory and time.
+            </p>
+            <p>
+              Mathematically speaking, an attention mechanism computes attention
+              weights that reflect the relative importance of each part of an
+              input sequence to the task at hand. It then applies those
+              attention weights to increase (or decrease) the influence of each
+              part of the input, in accordance with its respective importance.
+              An attention model—that is, an artificial intelligence model that
+              employs an attention mechanism—is trained to assign accurate
+              attention weights through supervised learning or self-supervised
+              learning on a large dataset of examples.
+            </p>
+          </section>
+
+          <section class="history">
+            <h2>2. Historical Context and Research Papers</h2>
+
+            <p>
+              Attention mechanisms were originally introduced by Bahdanau et al
+              in 2014 as a technique to address the shortcomings of what were
+              then state-of-the-art recurrent neural network (RNN) models used
+              for machine translation. Subsequent research integrated attention
+              mechanisms into the convolutional neural networks (CNNs) used for
+              tasks such as image captioning and visual question answering.
+            </p>
+
+            <p>
+              In 2017, the seminal paper “Attention is All You Need” introduced
+              the transformer model, which eschews recurrence and convolutions
+              altogether in favor of only attention layers and standard
+              feedforward layers. The transformer architecture has since become
+              the backbone of the cutting-edge models powering the ongoing era
+              of generative AI.
+            </p>
+          </section>
+
+          <section class="why-attention">
+            <h2>3. Why is Attention Needed?</h2>
+            <ul>
+              <li>
+                <strong>Handles Long-Range Dependencies:</strong> Unlike RNNs,
+                which process sequences sequentially and can struggle with
+                long-range dependencies, attention enables direct interactions
+                between all words in a sentence. This capability is crucial for
+                capturing context in long sentences where words may be several
+                steps apart.
+              </li>
+              <li>
+                <strong>Improves Parallelization:</strong> Attention eliminates
+                sequential dependencies, allowing faster training and inference.
+                This makes models more efficient and scalable, especially when
+                dealing with large datasets.
+              </li>
+              <li>
+                <strong>Context-Aware Representations:</strong> Attention
+                dynamically adjusts the importance of different words in the
+                input based on the context. This ability allows models to
+                generate more nuanced and accurate representations, improving
+                performance on tasks like machine translation and text
+                generation.
+              </li>
+              <li>
+                <strong>Efficiency and Scalability:</strong> The attention
+                mechanism's ability to process sequences in parallel makes it
+                more efficient and scalable, especially for large datasets and
+                complex tasks.
+              </li>
+            </ul>
+          </section>
+
+          <section class="self-attention">
+            <h2>4. Understanding Self-Attention (Step-by-Step)</h2>
+
+            <h3>4.1 Representing Input as Tokens</h3>
+            <p>
+              Before any attention mechanism can be applied, the input text must
+              be converted into numerical representations. This involves
+              tokenization and embedding layers.
+              <br />
+              <strong>Tokenization:</strong> Breaking down the input text into
+              individual tokens such as words or subwords. For example, the
+              sentence "The cat sat on the mat" would be tokenized into ["The",
+              "cat", "sat", "on", "the", "mat"].
+            </p>
+
+            <h3>4.2 Generating Queries, Keys, and Values</h3>
+            <p>
+              The self-attention mechanism relies on three main components:
+              queries (Q), keys (K), and values (V). These are derived from the
+              token embeddings through linear layers (matrices). Separate linear
+              layers for each component allow the model to learn how to query
+              the input for relevant information, identify where it is stored
+              (keys), and retrieve the corresponding values.
+            </p>
+
+            <h3>4.3 Computing Attention Weights</h3>
+            <p>
+              Attention weights are computed to determine how much attention
+              each token should pay to other tokens. This involves a dot-product
+              operation between queries and keys to measure similarity, followed
+              by applying a softmax function to normalize these scores into a
+              probability distribution. This step ensures that attention weights
+              sum to one, allowing each token to contribute proportionally to
+              the final representation.
+            </p>
+
+            <h3>4.4 Weighted Sum of Values</h3>
+            <p>
+              The final step in computing self-attention is taking a weighted
+              sum of the values, where the weights are the computed attention
+              scores. This aggregates the most relevant information from the
+              input sequence, producing a new representation that captures the
+              context-specific relationships between tokens.
+            </p>
+
+            <h3>4.5 Multi-Head Attention</h3>
+            <p>
+              Many modern models, including the original Transformer, implement
+              multi-head attention. This approach uses multiple independent
+              attention mechanisms in parallel, each with their own query, key,
+              and value matrices. The results from these heads are concatenated
+              and transformed back into the original dimension. Multi-head
+              attention allows models to learn various patterns and
+              relationships simultaneously, enhancing their ability to capture
+              complex language structures.
+            </p>
+
+            <h3>4.6 Adding and Normalization</h3>
+            <p>
+              After computing multi-head attention, results are combined with a
+              residual connection from the original input embeddings. This skip
+              connection helps mitigate vanishing gradients during training and
+              allows layers to perform identity mapping tasks better. Layer
+              normalization follows to ensure outputs have consistent scale and
+              spacing, improving training stability and enabling faster
+              convergence.
+            </p>
+          </section>
+
+          <section class="conclusion">
+            <h2>5. Conclusion</h2>
+            <p>
+              The attention mechanism, particularly self-attention, has
+              revolutionized natural language processing by enabling models to
+              dynamically focus on the most relevant parts of the input
+              sequence. By allowing all tokens to interact with each other
+              directly, attention mechanisms overcome the limitations of
+              traditional models like RNNs and CNNs, leading to more efficient
+              and context-aware models. The Transformer architecture, relying
+              exclusively on attention, has been pivotal in advancing NLP tasks
+              such as machine translation, text summarization, and text
+              generation. Understanding the intricate workings of the attention
+              mechanism is fundamental to comprehending the capabilities of
+              modern NLP models and their impact on the field.
+            </p>
+          </section>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
