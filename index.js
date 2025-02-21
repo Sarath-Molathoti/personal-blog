@@ -2,7 +2,90 @@ AOS.init({
   duration: 1000,
   once: true,
 });
+document.addEventListener("DOMContentLoaded", function () {
+  particlesJS("particles-js", {
+    particles: {
+      number: {
+        value: 80,
+        density: {
+          enable: true,
+          value_area: 800,
+        },
+      },
+      color: {
+        value: ["#001a3a", "#00ff9d", "#00ccff"],
+      },
+      shape: {
+        type: "circle",
+      },
+      opacity: {
+        value: 0.5,
+        random: false,
+      },
+      size: {
+        value: 3,
+        random: true,
+      },
+      line_linked: {
+        enable: true,
+        distance: 150,
+        color: "#00ff9d",
+        opacity: 0.4,
+        width: 1,
+      },
+      move: {
+        enable: true,
+        speed: 6,
+        direction: "none",
+        random: false,
+        straight: false,
+        bounce: false,
+        attract: false,
+      },
+      bounce: {
+        vertical: 0.4,
+        horizontal: 0.4,
+      },
+      friction: {
+        value: 0.1,
+      },
+    },
+    interactivity: {
+      detect_on: "window", // Change this from 'canvas' to 'window'
+      events: {
+        onhover: {
+          enable: true,
+          mode: "repulse",
+        },
+        onclick: {
+          enable: true,
+          mode: "push",
+        },
+        resize: true,
+      },
+      modes: {
+        repulse: {
+          distance: 100,
+          duration: 0.4,
+        },
+        push: {
+          particles_nb: 4,
+        },
+      },
+    },
+    animation: {
+      enable: true,
+      speed: 1,
+    },
+    retina_detect: true,
+  });
 
+  // Add touch support
+  document.addEventListener("touchstart", function (e) {
+    e.preventDefault();
+    particlesJS("particles-js").eachParticlerepell();
+  });
+});
 const dynamicText = document.getElementById("dynamicText");
 const titles = ["Full Stack Developer", "React Expert", "Java Expert"];
 let currentTitleIndex = 0;
