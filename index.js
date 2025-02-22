@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 const dynamicText = document.getElementById("dynamicText");
-const titles = ["Full Stack Developer", "React Expert", "Java Expert"];
+const titles = ["AI Enthusiast", "Software Developer", "Anti-Social Butterfly"];
 let currentTitleIndex = 0;
 
 function typeText() {
